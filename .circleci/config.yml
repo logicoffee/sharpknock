@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: logicoffee/hakyll_netlify
+      - image: logicoffee/hakyll_netlify:lts-12.16
     steps:
       - checkout
       - restore_cache:
