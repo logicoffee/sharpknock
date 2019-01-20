@@ -1,0 +1,31 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: logicoffee/hakyll_netlify
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Cached Dependencies
+          keys:
+            - stack-{{ .Branch }}-{{ checksum  "stack.yaml" }}
+            - stack-{{ .Branch }}-
+            - stack-
+      - run:
+          name: Resolve Dependencies
+          command: stack build --dependencies-only
+      - save_cache:
+          name: Cache Dependencies
+          key: stack-{{ .Branch }}-{{ checksum "stack.yaml" }}
+          paths:
+            - ~/.stack
+            - ./.stack-work
+      - run:
+          name: Build Site App
+          command: stack build --pedantic
+      - run:
+          name: Generate Static Site
+          command: stack exec sharpknock build
+      - run:
+          name: Publish to Netlify
+          command: netlify deploy --dir=_site --prod
