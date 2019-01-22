@@ -1,8 +1,14 @@
-<div class="info">
-    Posted on $date$
-    $if(author)$
-        by $author$
-    $endif$
-</div>
+<article class="post">
+  <h1>$title$</h1>
 
-$body$
+  <div class="meta">
+    <span class="date">
+      $date$
+    </span>
+
+  </div>
+
+  <div class="entry">
+    $body$
+  </div>
+</article>

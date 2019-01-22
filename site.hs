@@ -3,6 +3,8 @@
 import           Data.Monoid (mappend)
 import           Hakyll
 import           Hakyll.Web.Sass (sassCompiler)
+import           Skylighting (styleToCss, kate)
+import           Text.Pandoc
 
 
 --------------------------------------------------------------------------------
@@ -12,12 +14,16 @@ main = hakyll $ do
         route   idRoute
         compile copyFileCompiler
 
+    create ["css/highlight.css"] $ do
+        route idRoute
+        compile $ makeItem $ compressCss $ styleToCss kate
+
     match "css/*.scss" $ do
         route   $ setExtension "css"
         let compressCssItem = fmap compressCss
         compile (compressCssItem <$> sassCompiler)
 
-    match (fromList ["about.rst", "contact.markdown"]) $ do
+    match (fromList ["about.md", "contact.md"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
@@ -25,7 +31,8 @@ main = hakyll $ do
 
     match "posts/*" $ do
         route $ setExtension "html"
-        compile $ pandocCompiler
+        compile $ pandocCompilerWith defaultHakyllReaderOptions wOptions
+            >>= saveSnapshot "content"
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
@@ -35,8 +42,8 @@ main = hakyll $ do
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let archiveCtx =
-                    listField "posts" postCtx (return posts) `mappend`
-                    constField "title" "Archives"            `mappend`
+                    listField "posts" postCtx (return posts) <>
+                    constField "title" "Archives"            <>
                     defaultContext
 
             makeItem ""
@@ -50,8 +57,8 @@ main = hakyll $ do
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let indexCtx =
-                    listField "posts" postCtx (return posts) `mappend`
-                    constField "title" "Home"                `mappend`
+                    listField "posts" postCtx (return posts) <>
+                    constField "title" "Home"                <>
                     defaultContext
 
             getResourceBody
@@ -65,6 +72,11 @@ main = hakyll $ do
 --------------------------------------------------------------------------------
 postCtx :: Context String
 postCtx =
-    dateField "date" "%B %e, %Y" `mappend`
+    teaserField "teaser" "content" <>
+    dateField "date" "%B %e, %Y"   <>
     defaultContext
+
+wOptions :: WriterOptions
+wOptions = defaultHakyllWriterOptions { writerHTMLMathMethod = MathJax ""}
+
 

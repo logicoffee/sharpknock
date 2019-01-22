@@ -21,3 +21,5 @@ executable sharpknock
       base >= 4.7 && < 5
     , hakyll
     , hakyll-sass
+    , skylighting
+    , pandoc

@@ -1,0 +1,24 @@
+<div class="posts">
+    $for(posts)$
+        <article class="post">
+            <h1><a href="$url$">$title$</a></h1>
+
+            <div clsss="meta">
+                <span class="date">$date$</span>
+            </div>
+
+            $if(tags)$
+            <ul class="tag">
+                $for(tags)$
+                    <li>$tag$</li>
+                $endfor$
+            </ul>
+            $endif$
+
+            <div class="entry">
+                $teaser$
+            </div>
+            <a href="$url$" class="read-more">もっと読む</a>
+        </article>
+    $endfor$
+</div>
