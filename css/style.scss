@@ -392,16 +392,23 @@ nav {
   }
 }
 
+// Entry
+.entry {
+  h1, h2, h3, h4, h5, h6 {
+    border-bottom: 1px solid $divider-color
+  }
+}
+
 // Posts
 .posts > .post {
   padding-bottom: 2em;
-  border-bottom: 1px solid $divider-color;
+  border-top: 1px solid $divider-color;
 }
 
-.posts > .post:last-child {
-  padding-bottom: 1em;
-  border-bottom: none;
-}
+//.posts > .post:last-child {
+//  padding-bottom: 1em;
+//  border-bottom: none;
+//}
 
 .post {
   h1 {
