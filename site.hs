@@ -60,10 +60,10 @@ main = hakyll $ do
             (sortRecentFirst >=> return . paginateEvery 10)
             pattern
             (fromCapture (fromGlob ("categories/" ++ category ++ "/*.html")) . show)
-        paginateRules categoryPaginate $ \pageNum pattern -> do
+        paginateRules categoryPaginate $ \pageNum ptn -> do
             route idRoute
             compile $ do
-                posts <- recentFirst =<< loadAll pattern
+                posts <- recentFirst =<< loadAll ptn
                 let ctx =
                         listField "posts" postCtx (return posts) <>
                         paginateContext categoryPaginate pageNum <>
@@ -84,7 +84,7 @@ main = hakyll $ do
     paginateRules archivePaginate $ \pageNum pattern -> do
         route idRoute
         compile $ do
-            posts <- recentFirst =<< loadAll "posts/**"
+            posts <- recentFirst =<< loadAll pattern
             let ctx =
                     listField "posts" postCtx (return posts) <>
                     paginateContext archivePaginate pageNum  <>
