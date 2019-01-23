@@ -76,11 +76,11 @@ main = hakyll $ do
                     >>= relativizeUrls
 
     --------- Tags ------------------------------------------------------------
-    tagsRules tags $ \tags pattern -> do
+    tagsRules tags $ \tagName pattern -> do
         tagsPaginate <- buildPaginateWith
             (sortRecentFirst >=> return . paginateEvery 10)
             pattern
-            (fromCapture (fromGlob ("tags/" ++ tags ++ "/*.html")) . show)
+            (fromCapture (fromGlob ("tags/" ++ tagName ++ "/*.html")) . show)
         paginateRules tagsPaginate $ \pageNum ptn -> do
             route idRoute
             compile $ do
@@ -88,7 +88,7 @@ main = hakyll $ do
                 let ctx =
                         listField "posts" postCtx (return posts) <>
                         paginateContext tagsPaginate pageNum <>
-                        constField "title" tags              <>
+                        constField "title" tagName           <>
                         defaultContext
                 makeItem ""
                     >>= loadAndApplyTemplate "templates/archive.html" ctx
