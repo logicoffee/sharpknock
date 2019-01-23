@@ -1,2 +1,20 @@
 <h1>$title$</h1>
 $partial("templates/_post-list.html")$
+
+<div class="pagination">
+  $if(previousPageUrl)$
+    <span class="prev">
+      <a href="$previousPageUrl$" class="prev">
+        前のページ
+      </a>
+    </span>
+  $endif$
+
+  $if(nextPageUrl)$
+    <span class="next">
+      <a href="$nextPageUrl$" class="next">
+        次のページ
+      </a>
+    </span>
+  $endif$
+</div>

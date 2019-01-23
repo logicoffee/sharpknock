@@ -1,5 +1,6 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
+import           Control.Monad
 import           Hakyll
 import           Hakyll.Web.Sass (sassCompiler)
 import           Skylighting (styleToCss, kate)
@@ -36,21 +37,6 @@ main = hakyll $ do
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
 
-    create ["archive.html"] $ do
-        route idRoute
-        compile $ do
-            posts <- recentFirst =<< loadAll "posts/**"
-            let archiveCtx =
-                    listField "posts" postCtx (return posts) <>
-                    constField "title" "Archives"            <>
-                    defaultContext
-
-            makeItem ""
-                >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
-                >>= loadAndApplyTemplate "templates/default.html" archiveCtx
-                >>= relativizeUrls
-
-
     match "index.html" $ do
         route idRoute
         compile $ do
@@ -63,6 +49,26 @@ main = hakyll $ do
             getResourceBody
                 >>= applyAsTemplate indexCtx
                 >>= loadAndApplyTemplate "templates/default.html" indexCtx
+                >>= relativizeUrls
+    
+    archivePaginate <- buildPaginateWith
+        (sortRecentFirst >=> return . paginateEvery 10)
+        "posts/**"
+        (fromCapture "archive/*.html" . show)
+    
+    paginateRules archivePaginate $ \number pattern -> do
+        route idRoute
+        compile $ do
+            posts <- recentFirst =<< loadAll pattern
+            let ctx = 
+                    listField "posts" postCtx (return posts) <>
+                    constField "title" "Archives"            <>
+                    paginateContext archivePaginate number   <>
+                    defaultContext
+
+            makeItem ""
+                >>= loadAndApplyTemplate "templates/archive.html" ctx
+                >>= loadAndApplyTemplate "templates/default.html" ctx
                 >>= relativizeUrls
 
     match "templates/*" $ compile templateCompiler
