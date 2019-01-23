@@ -10,8 +10,9 @@ import           Text.Pandoc
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyll $ do
-    categories <- buildCategories "posts/**" (fromCapture "categories/*/1.html") -- おかしい
-    let postCtx = postContextWith categories
+    tags       <- buildTags       "posts/**" (fromCapture "tags/*/1.html")
+    categories <- buildCategories "posts/**" (fromCapture "categories/*/1.html")
+    let postCtx = postContextWith categories tags
 
     match "images/*" $ do
         route   idRoute
@@ -74,6 +75,25 @@ main = hakyll $ do
                     >>= loadAndApplyTemplate "templates/default.html" ctx
                     >>= relativizeUrls
 
+    --------- Tags ------------------------------------------------------------
+    tagsRules tags $ \tags pattern -> do
+        tagsPaginate <- buildPaginateWith
+            (sortRecentFirst >=> return . paginateEvery 10)
+            pattern
+            (fromCapture (fromGlob ("tags/" ++ tags ++ "/*.html")) . show)
+        paginateRules tagsPaginate $ \pageNum ptn -> do
+            route idRoute
+            compile $ do
+                posts <- recentFirst =<< loadAll ptn
+                let ctx =
+                        listField "posts" postCtx (return posts) <>
+                        paginateContext tagsPaginate pageNum <>
+                        constField "title" tags              <>
+                        defaultContext
+                makeItem ""
+                    >>= loadAndApplyTemplate "templates/archive.html" ctx
+                    >>= loadAndApplyTemplate "templates/default.html" ctx
+                    >>= relativizeUrls
 
     --------- Archive ---------------------------------------------------------
     archivePaginate <- buildPaginateWith
@@ -99,9 +119,10 @@ main = hakyll $ do
 
 
 --------------------------------------------------------------------------------
-postContextWith :: Tags -> Context String
-postContextWith categories =
+postContextWith :: Tags -> Tags -> Context String
+postContextWith categories tags =
     categoryField "category" categories <>
+    tagsField "tags" tags             <>
     teaserField "teaser" "content"    <>
     dateField "date" "%B %e, %Y"      <>
     defaultContext
