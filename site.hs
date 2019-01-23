@@ -10,6 +10,9 @@ import           Text.Pandoc
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyll $ do
+    categories <- buildCategories "posts/**" (fromCapture "categories/*/1.html") -- おかしい
+    let postCtx = postContextWith categories
+
     match "images/*" $ do
         route   idRoute
         compile copyFileCompiler
@@ -23,7 +26,7 @@ main = hakyll $ do
         let compressCssItem = fmap compressCss
         compile (compressCssItem <$> sassCompiler)
 
-    match (fromList ["about.md", "contact.md"]) $ do
+    match (fromList ["about.md", "contact.md", "categories.md"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
@@ -50,38 +53,58 @@ main = hakyll $ do
                 >>= applyAsTemplate indexCtx
                 >>= loadAndApplyTemplate "templates/default.html" indexCtx
                 >>= relativizeUrls
-    
+
+    --------- Categories ------------------------------------------------------
+    tagsRules categories $ \category pattern -> do
+        categoryPaginate <- buildPaginateWith
+            (sortRecentFirst >=> return . paginateEvery 10)
+            pattern
+            (fromCapture (fromGlob ("categories/" ++ category ++ "/*.html")) . show)
+        paginateRules categoryPaginate $ \pageNum pattern -> do
+            route idRoute
+            compile $ do
+                posts <- recentFirst =<< loadAll pattern
+                let ctx =
+                        listField "posts" postCtx (return posts) <>
+                        paginateContext categoryPaginate pageNum <>
+                        constField "title" category              <>
+                        defaultContext
+                makeItem ""
+                    >>= loadAndApplyTemplate "templates/archive.html" ctx
+                    >>= loadAndApplyTemplate "templates/default.html" ctx
+                    >>= relativizeUrls
+
+
+    --------- Archive ---------------------------------------------------------
     archivePaginate <- buildPaginateWith
         (sortRecentFirst >=> return . paginateEvery 10)
         "posts/**"
-        (fromCapture "archive/*.html" . show)
-    
-    paginateRules archivePaginate $ \number pattern -> do
+        (fromCapture "archives/*.html" . show)
+        
+    paginateRules archivePaginate $ \pageNum pattern -> do
         route idRoute
         compile $ do
-            posts <- recentFirst =<< loadAll pattern
-            let ctx = 
+            posts <- recentFirst =<< loadAll "posts/**"
+            let ctx =
                     listField "posts" postCtx (return posts) <>
+                    paginateContext archivePaginate pageNum  <>
                     constField "title" "Archives"            <>
-                    paginateContext archivePaginate number   <>
                     defaultContext
-
             makeItem ""
                 >>= loadAndApplyTemplate "templates/archive.html" ctx
                 >>= loadAndApplyTemplate "templates/default.html" ctx
                 >>= relativizeUrls
-
+   
     match "templates/*" $ compile templateCompiler
 
 
 --------------------------------------------------------------------------------
-postCtx :: Context String
-postCtx =
-    teaserField "teaser" "content" <>
-    dateField "date" "%B %e, %Y"   <>
+postContextWith :: Tags -> Context String
+postContextWith categories =
+    categoryField "category" categories <>
+    teaserField "teaser" "content"    <>
+    dateField "date" "%B %e, %Y"      <>
     defaultContext
 
 wOptions :: WriterOptions
 wOptions = defaultHakyllWriterOptions { writerHTMLMathMethod = MathJax ""}
-
-

@@ -427,13 +427,13 @@ nav {
     font-weight: 300;
     font-size: $small-font-size;
 
-    li:before {
-      content: '';
-    }
+    //li:before {
+    //  content: '';
+    //}
 
-    li {
-      display: inline;
-      margin: 0;
+    //li {
+    //  display: inline;
+    //  margin: 0;
 
       > a {
         margin: 3px 3px 3px 0;
@@ -442,7 +442,7 @@ nav {
         background-color: $tag-index-label-background-color;
         border-radius: 3px;
       }
-    }
+    //}
   }
 
   .comments {
