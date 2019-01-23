@@ -1,5 +1,6 @@
 ---
 title: テスト記事
+published: 2019-01-20
 tags: test, hakyll
 mathjax: on
 ---
