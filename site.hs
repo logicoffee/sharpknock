@@ -47,7 +47,7 @@ main = hakyll $ do
             posts <- recentFirst =<< loadAll "posts/**"
             let indexCtx =
                     listField "posts" postCtx (return $ take 5 posts) <>
-                    constField "title" "Home"                <>
+                    constField "title" "Home"                         <>
                     defaultContext
 
             getResourceBody
@@ -87,8 +87,8 @@ main = hakyll $ do
                 posts <- recentFirst =<< loadAll ptn
                 let ctx =
                         listField "posts" postCtx (return posts) <>
-                        paginateContext tagsPaginate pageNum <>
-                        constField "title" tagName           <>
+                        paginateContext tagsPaginate pageNum     <>
+                        constField "title" tagName               <>
                         defaultContext
                 makeItem ""
                     >>= loadAndApplyTemplate "templates/archive.html" ctx
@@ -122,10 +122,15 @@ main = hakyll $ do
 postContextWith :: Tags -> Tags -> Context String
 postContextWith categories tags =
     categoryField "category" categories <>
-    tagsField "tags" tags             <>
-    teaserField "teaser" "content"    <>
-    dateField "date" "%B %e, %Y"      <>
+    tagsField "tags" tags               <>
+    teaserField "teaser" "content"      <>
+    dateField "date" "%B %e, %Y"        <>
     defaultContext
 
 wOptions :: WriterOptions
-wOptions = defaultHakyllWriterOptions { writerHTMLMathMethod = MathJax ""}
+wOptions = defaultHakyllWriterOptions
+    { writerHTMLMathMethod = MathJax ""
+    , writerTableOfContents = True
+    , writerTOCDepth = 3
+    , writerTemplate = Just "$toc$\n$body$"
+    }
