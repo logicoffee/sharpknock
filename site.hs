@@ -130,7 +130,4 @@ postContextWith categories tags =
 wOptions :: WriterOptions
 wOptions = defaultHakyllWriterOptions
     { writerHTMLMathMethod = MathJax ""
-    , writerTableOfContents = True
-    , writerTOCDepth = 3
-    , writerTemplate = Just "$toc$\n$body$"
     }
