@@ -115,17 +115,32 @@ main = hakyll $ do
                 >>= loadAndApplyTemplate "templates/default.html" ctx
                 >>= relativizeUrls
    
+    create ["sitemap.xml"] $ do
+        route idRoute
+        compile $ do
+            posts <- recentFirst =<< loadAll "posts/**"
+            let ctx =
+                    constField "root" root                   <>
+                    listField "posts" postCtx (return posts) <>
+                    defaultContext
+            makeItem ""
+                >>= loadAndApplyTemplate "templates/sitemap.xml" ctx
+    
     match "templates/*" $ compile templateCompiler
 
 
 --------------------------------------------------------------------------------
 postContextWith :: Tags -> Tags -> Context String
 postContextWith categories tags =
+    constField "root" root              <>
     categoryField "category" categories <>
     tagsField "tags" tags               <>
     teaserField "teaser" "content"      <>
     dateField "date" "%B %e, %Y"        <>
     defaultContext
+
+root :: String
+root = "https://sharpknock.com"
 
 wOptions :: WriterOptions
 wOptions = defaultHakyllWriterOptions
