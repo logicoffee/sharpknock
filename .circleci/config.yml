@@ -25,7 +25,7 @@ jobs:
           command: stack build --pedantic
       - run:
           name: Generate Static Site
-          command: stack exec sharpknock build
+          command: stack exec sharpknock rebuild
       - run:
           name: Publish to Netlify
           command: netlify deploy --dir=_site --prod
