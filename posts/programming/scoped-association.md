@@ -190,3 +190,13 @@ end
 冒頭で紹介した参考記事を見つけたときはそれはもう感動しましたね.
 
 今回説明したScoped Associationsは使えるケースが他にもありそうです. どちらにせよコントローラに長々とクエリメソッドを書くのはあまり美しくないですしね. よく使うクエリはモデルにまとめておくのがよさそうです.
+
+
+<style>
+  .framed {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    border: solid 1px #dee2e6;
+  }
+</style>
