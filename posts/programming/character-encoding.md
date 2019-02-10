@@ -179,7 +179,7 @@ BOMなしUTF-8やShift_JIS, EUC-JPはUS-ASCIIと互換性がある(ただしShif
 README.md: ASCII text
 ```
 
-##　改行コード
+## 改行コード
 CR(Carriage Return)とLF(Line Feed)の2種類がある. システムやソフトウェアによって, 片方もしくは両方を用いる.
 
 US-ASCIIではCRは`0x0D`, LFは`0x0A`である.
