@@ -614,6 +614,16 @@ pre > code {
   word-wrap: break-word
 }
 
+// for toc
+
+#toc {
+  padding: 1rem 1.5rem;
+  margin: 2rem auto;
+  width: 80%;
+  border: 1px solid #E1E1E1;
+  border-radius: 4px
+}
+
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
