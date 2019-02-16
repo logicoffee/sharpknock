@@ -5,8 +5,6 @@ import           Hakyll
 import           Hakyll.Web.Sass (sassCompiler)
 import           Skylighting     (kate, styleToCss)
 import           Src.Compiler
-import           Text.Pandoc
-import           Text.Regex.TDFA ((=~))
 
 
 --------------------------------------------------------------------------------
