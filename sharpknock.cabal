@@ -32,3 +32,4 @@ executable sharpknock
     , regex-tdfa
   other-modules:
       Src.Toc
+    , Src.Compiler

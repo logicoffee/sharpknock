@@ -4,7 +4,7 @@ import           Control.Monad
 import           Hakyll
 import           Hakyll.Web.Sass (sassCompiler)
 import           Skylighting     (kate, styleToCss)
-import           Src.Toc
+import           Src.Compiler
 import           Text.Pandoc
 import           Text.Regex.TDFA ((=~))
 
@@ -37,9 +37,8 @@ main = hakyll $ do
 
     match "posts/**" $ do
         route $ setExtension "html"
-        compile $ pandocCompilerWith defaultHakyllReaderOptions wOptions
+        compile $ pandocCompilerWithToc
             >>= saveSnapshot "content"
-            >>= tocCompiler
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
@@ -144,43 +143,3 @@ postContextWith categories tags =
 
 root :: String
 root = "https://sharpknock.com"
-
-wOptions :: WriterOptions
-wOptions = defaultHakyllWriterOptions
-    { writerHTMLMathMethod = MathJax ""
-    }
-
-
--------- Toc -------------------------------------------------------------------
-enabledToc :: Item String -> Compiler Bool
-enabledToc item = do
-    result <- getMetadataField (itemIdentifier item) "toc"
-    case result of
-        Nothing -> return False
-        Just _  -> return True
-
-extractToc :: Item String -> Compiler String
-extractToc = fmap (foldMap renderToc) . readPandoc
-
-tocMarker = "{:toc}" :: String
-
-splitAtTocMarker :: String -> Item String -> Compiler (String, String)
-splitAtTocMarker marker item =
-    let body          = itemBody item
-        (o, l)        = body =~ marker
-        (former, tmp) = splitAt o body
-        (_, latter)   = splitAt l tmp
-    in return (former, latter)
-
-
-
-tocCompiler :: Item String -> Compiler (Item String)
-tocCompiler item = do
-    enabled <- enabledToc item
-    if enabled
-        then do
-            (former, latter) <- splitAtTocMarker tocMarker item
-            toc <- extractToc item
-            makeItem $ former ++ toc ++ latter
-        else return item
-

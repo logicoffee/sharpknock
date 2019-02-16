@@ -44,6 +44,18 @@ renderPandocToHtml pandoc =
         Left  _    -> Empty ()
         Right item -> item
 
-renderToc :: Pandoc -> String
-renderToc = renderHtml . markupHeaders . makeHeaderForest . query (filterHeader 3)
+markupToc :: Forest Block -> H.Html
+markupToc headers =
+    H.div ! A.id "toc" $ H.ul $ markupHeaders headers
+
+replaceToc :: String -> Block -> Block
+replaceToc toc (Para [Str "{toc}"]) = RawBlock "html" toc
+replaceToc _ block                  = block
+
+insertToc :: Pandoc -> Pandoc
+insertToc source =
+    walk (replaceToc toc_str) source where
+        headers  = query (filterHeader 3) source
+        toc_html = markupToc . makeHeaderForest $ headers
+        toc_str  = renderHtml toc_html
 
