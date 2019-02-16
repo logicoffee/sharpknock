@@ -29,7 +29,7 @@ makeHeaderForest = map (\(x:xs) -> Node x (makeHeaderForest xs)) . groupBy ((<) 
 markupHeader :: Tree Block -> H.Html
 markupHeader (Node (Header _ (ident, _, _) inlines) headers)
     | null headers  = H.li link
-    | otherwise     = H.li $ link <> H.ol (markupHeaders headers)
+    | otherwise     = H.li $ link <> H.ul (markupHeaders headers)
         where
             link = H.a ! A.href (H.toValue ("#" ++ ident)) $
                 renderPandocToHtml (Pandoc nullMeta [Plain inlines])
