@@ -2,11 +2,14 @@
 title: Dockerコンテナ内のPostgresデータベースをダンプする方法
 published: 2019-02-10
 tags: Postgres, Docker
+toc: on
 ---
 
 Dockerコンテナ内で起動しているPostgreSQLのデータベースをダンプしたいときがありまして, そのやり方を備忘録として残しておきます.
 
 <!--more-->
+
+{toc}
 
 ## 基本構文
 

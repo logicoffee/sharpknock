@@ -2,11 +2,14 @@
 title: HakyllブログをCircleCIつかってNetlifyにデプロイするための設定
 published: 2019-01-25
 tags: Hakyll, Netlify, CircleCI, Docker
+toc: on
 ---
 
 静的サイトジェネレーターであるHakyllを使ってブログを構築しました. NetlifyにはCD(継続的デプロイ)の機能がありますが, Haskellには標準対応してないみたいです. ならば外部のCIサービスを利用するしかないわけですが, CircleCIを採用しました. 本記事ではHakyllブログをNetlifyにデプロイするためのCircleCIの設定を解説します.
 
 <!--more-->
+
+{toc}
 
 本記事は[こちらの記事](https://nazarii.bardiuk.com/posts/hakyll-circle.html)を参考にさせてもらいました. この記事さまさまです.
 
