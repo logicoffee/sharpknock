@@ -19,7 +19,16 @@ executable sharpknock
   ghc-options:         -threaded
   build-depends:
       base >= 4.7 && < 5
+    , hspec
+    , QuickCheck
+    , containers
     , hakyll
     , hakyll-sass
     , skylighting
     , pandoc
+    , pandoc-types
+    , blaze-html
+    , blaze-markup
+    , regex-tdfa
+  other-modules:
+      Src.Toc
