@@ -2,7 +2,7 @@
 title: 代数トポロジー
 published: 2019-01-23
 mathjax: on
-tags: topology
+tags: トポロジー
 ---
 
 代数トポロジーはおもしろいよ.

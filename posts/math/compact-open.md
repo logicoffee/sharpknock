@@ -1,7 +1,7 @@
 ---
 title: コンパクト開位相まとめ
 published: 2019-02-17
-tags: トポロジー, コンパクト開位相
+tags: トポロジー, 位相
 toc: on
 mathjax: on
 ---
