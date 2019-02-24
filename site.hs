@@ -2,9 +2,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Control.Monad
 import           Hakyll
-import           Hakyll.Web.Sass     (sassCompiler)
+import           Hakyll.Web.Sass (sassCompiler)
 import           Src.Compiler
-import           Text.Pandoc.Options
 
 
 --------------------------------------------------------------------------------
