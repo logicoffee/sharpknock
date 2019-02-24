@@ -15,4 +15,5 @@ pandocCompilerWithToc = do
 wOptions :: WriterOptions
 wOptions = defaultHakyllWriterOptions
     { writerHTMLMathMethod = MathJax ""
+    , writerHighlightStyle = Nothing
     }
