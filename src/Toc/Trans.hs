@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Src.Toc where
+module Toc.Trans where
 
 import           Data.Function                   (on)
 import           Data.List                       (groupBy)

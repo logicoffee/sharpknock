@@ -3,7 +3,7 @@
 import           Control.Monad
 import           Hakyll
 import           Hakyll.Web.Sass (sassCompiler)
-import           Src.Compiler
+import           Toc.Compiler
 
 
 --------------------------------------------------------------------------------

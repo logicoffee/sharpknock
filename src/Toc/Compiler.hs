@@ -1,8 +1,8 @@
-module Src.Compiler where
+module Toc.Compiler where
 
 import           Hakyll
-import           Src.Toc
 import           Text.Pandoc.Options
+import           Toc.Trans
 
 pandocCompilerWithToc :: Compiler (Item String)
 pandocCompilerWithToc = do

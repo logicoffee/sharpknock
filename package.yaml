@@ -1,0 +1,42 @@
+name:                sharpknock
+version:             0.1.0.0
+github:              "logicoffee/sharpknock"
+license:             BSD3
+author:              "Ryo Iketani"
+maintainer:          "riemann1618@gmail.com"
+
+extra-source-files:
+- README.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/logicoffee/scotty_test#readme>
+
+dependencies:
+  - base >= 4.7 && < 5
+  - containers
+  - hakyll
+  - hakyll-sass
+  - pandoc
+  - pandoc-types
+  - blaze-html
+  - blaze-markup
+
+library:
+  source-dirs: src
+
+executables:
+  sharpknock:
+    main:                site.hs
+    ghc-options:
+      - -Wall
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - sharpknock
