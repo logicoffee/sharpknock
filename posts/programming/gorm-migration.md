@@ -27,7 +27,7 @@ Webアプリを作って行く途中でいろいろ試したので無駄にフ�
 package main
 
 import (
-	"github.com/ほにゃらら/models
+	"github.com/ほにゃらら/models"
 )
 
 func main() {
