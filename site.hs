@@ -59,13 +59,6 @@ main = hakyll $ do
                 >>= loadAndApplyTemplate "templates/default.html" indexCtx
                 >>= relativizeUrls
 
-    match "highlight-test.md" $ do
-        route $ setExtension "html"
-        compile $ pandocCompilerWith defaultHakyllReaderOptions testOptions
-            >>= loadAndApplyTemplate "templates/post.html" postCtx
-            >>= loadAndApplyTemplate "templates/default.html" postCtx
-            >>= relativizeUrls
-
     --------- Categories ------------------------------------------------------
     tagsRules categories $ \category patt -> do
         categoryPaginate <- buildPaginateWith
@@ -152,8 +145,3 @@ postContextWith categories tags =
 
 root :: String
 root = "https://sharpknock.com"
-
-
-testOptions = defaultHakyllWriterOptions
-    { writerHighlightStyle = Nothing
-    }
