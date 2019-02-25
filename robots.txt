@@ -1,3 +1,4 @@
 User-gent: *
+Disallow:
 Allow: /
 Sitemap: https://sharpknock.com/sitemap.xml
