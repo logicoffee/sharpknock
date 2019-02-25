@@ -15,7 +15,8 @@ descriptionField key snapshot = field key $ \item -> do
             show (itemIdentifier item)
         Just t -> return $ rawContent t
 
-descriptionSeparater = "<!--more-->" :: String
+descriptionSeparater :: String
+descriptionSeparater = "<!--more-->"
 
 rawContent :: String -> String
 rawContent = tail' . takeWhile (/= '<') . dropWhile (/= '>') where
