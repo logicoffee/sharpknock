@@ -76,7 +76,7 @@ main = hakyll $ do
                 let ctx =
                         listField "posts" postCtx (return posts) <>
                         paginateContext categoryPaginate pageNum <>
-                        constField "title" category              <>
+                        constField "title" ("カテゴリー" ++ category) <>
                         defaultContext
                 makeItem ""
                     >>= loadAndApplyTemplate "templates/archive.html" ctx
@@ -140,12 +140,12 @@ main = hakyll $ do
 --------------------------------------------------------------------------------
 postContextWith :: Tags -> Tags -> Context String
 postContextWith categories tags =
-    constField "root" root              <>
-    categoryField "category" categories <>
-    tagsField "tags" tags               <>
-    descriptionField "description" "content" <>
-    dateField "date" "%B %e, %Y"        <>
-    defaultContext
+    constField "root" root
+    <> categoryField "category" categories
+    <> tagsField "tags" tags
+    <> descriptionField "description" "content"
+    <> dateField "date" "%B %e, %Y"
+    <> defaultContext
 
 root :: String
 root = "https://sharpknock.com"
