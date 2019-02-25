@@ -59,6 +59,10 @@ main = hakyll $ do
                 >>= loadAndApplyTemplate "templates/default.html" indexCtx
                 >>= relativizeUrls
 
+    match "robots.txt" $ do
+        route idRoute
+        compile copyFileCompiler
+
     --------- Categories ------------------------------------------------------
     tagsRules categories $ \category patt -> do
         categoryPaginate <- buildPaginateWith
