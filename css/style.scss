@@ -630,10 +630,14 @@ pre > code {
 
 // for framed div
 .framed {
-  margin: .5rem auto;
+  margin: 1rem auto 2rem;
   padding: .3rem 1rem;
   border: 1px solid #E1E1E1;
-  border-radius: 4px
+  border-radius: 4px;
+  strong {
+    font-size: 120%;
+    margin-right: 1em;
+  }
 }
 
 
