@@ -3,6 +3,7 @@
 import           Control.Monad
 import           Hakyll
 import           Hakyll.Web.Sass (sassCompiler)
+import           Lib.Context     (descriptionField)
 import           Toc.Compiler
 
 
@@ -138,7 +139,7 @@ postContextWith categories tags =
     constField "root" root              <>
     categoryField "category" categories <>
     tagsField "tags" tags               <>
-    teaserField "teaser" "content"      <>
+    descriptionField "description" "content" <>
     dateField "date" "%B %e, %Y"        <>
     defaultContext
 
