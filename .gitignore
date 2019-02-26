@@ -21,3 +21,4 @@ _cache/
 _site/
 /.netlify
 sharpknock.cabal
+.DS_Store
