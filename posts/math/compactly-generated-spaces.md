@@ -14,6 +14,10 @@ toc: on
 
 以下空間は基本的にHausdorffとする.
 
+## 参考文献
+本記事はGrayのHOMOTOPY THEORYという本を参考にした.
+
+
 ## 定義
 まず定義から.
 
@@ -86,4 +90,52 @@ $f: X\to Y \in \mathcal{H}$とする. 集合同士の関数として$k(f)=f$と�
 $k(f)$の連続性は, 各コンパクト集合$C\subset X$上で確認すれば十分であるが, $k(f)|_C$は次のように分解できる.
 $$ C\cong I(C) \to f(I(C))\cong f(C)$$
 各写像が連続であるから, $k(f)|_C$も連続である.
+:::
+
+
+## 積
+
+$\mathcal{H}$におけるproductを$X\times_c Y$, $\mathcal{CG}$におけるproductを$X\times Y$と区別して書くことにする.
+
+:::{.framed}
+**定理**$X\times Y = k(X\times_c Y)$
+:::
+
+つまり$\mathcal{CG}$におけるproductは, 一旦$\mathcal{H}$でproductをとってから関手$k$で移したものであるということ.
+
+:::{.framed}
+**証明**productのuniversal propertyを証明する. 2つの射$W\to X,\ W\to Y$があると, 圏$\mathcal{H}$で考えたときに射$W\to X\times_c Y$が一意に定まる. これを関手$k$で送ると射$W\to k(X\times_c Y)$が得られる($k(W) = W$であることに注意). この射の一意性も少し考えるとわかる.
+
+![](/images/cg_product.jpg)
+:::
+
+
+:::{.framed}
+**命題**$X$を局所コンパクト空間, $Y\in\mathcal{CG}$とすると, $X\times Y = X\times_c Y$.
+:::
+
+:::{.framed}
+**命題**$X,Y\in\mathcal{H}$とすると, $k(X)\times k(Y) = k(X \times_c Y)$
+:::
+
+
+## ホモトピー群
+:::{.framed}
+**定理**$I: k(X)\to X$により誘導される写像$I_*:\pi_n(k(X), *) \to \pi_*(X, *)$は全単射である.
+
+---
+
+**証明**$\phi : (S^n, *)\to (X, *)$のホモトピー類に対し$k(\phi)$のホモトピー類を対応させる写像が$I_*$の逆写像である.
+
+ちなみにこれがwell-definedであることは, 関手$k$がホモトピーを保つかどうかを考えればよい.
+
+$H: X\times_c I \to Y$が$f$から$g$へのホモトピーであるとする($I$は単位区間です...紛らわしいね). これまでに挙げた命題から
+
+$$ k(X\times_c I) = k(X)\times k(I) = k(X)\times I $$
+
+であるから,
+
+$$ k(H) : k(X)\times I \to k(Y) $$
+
+である. これは$k(f)$から$k(g)$へのホモトピーになっている.
 :::
