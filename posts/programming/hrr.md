@@ -6,7 +6,7 @@ toc: on
 mathjax: on
 ---
 
-SQLジェネレーターの[HRR](http://khibino.github.io/haskell-relational-record/)(Haskell Relational Record)を使ってみました. サンプルコードはすべてGitHubで管理しています.
+SQLジェネレーターのHRR(Haskell Relational Record)を使ってみました. Dockerコンテナの準備からデータ挿入まで解説します.
 
 
 <!--more-->
