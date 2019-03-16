@@ -31,7 +31,7 @@ main = hakyll $ do
         let compressCssItem = fmap compressCss
         compile (compressCssItem <$> sassCompiler)
 
-    match (fromList ["about.md", "contact.md", "categories.md"]) $ do
+    match (fromList ["about.md", "contact.md", "categories.md", "privacy-policy.md"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
