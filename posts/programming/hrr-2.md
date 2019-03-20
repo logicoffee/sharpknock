@@ -13,7 +13,7 @@ toc: on
 
 ## 前回の復習
 
-[前回](/programming/hrr.html)は,
+[前回](/posts/programming/hrr.html)は,
 
 - PostgreSQLのDockerコンテナを用意
 - テーブルに対応したデータ型をHRRに生成してもらう
