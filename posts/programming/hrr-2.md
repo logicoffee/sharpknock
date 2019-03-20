@@ -80,7 +80,7 @@ $(defineTableFromDB'
 Haskell入門にはドライバーで設定する方法が書かれていました. それは次のような感じです.
 
 ```haskell
-$(defineTableFromDB'
+$(defineTableFromDB
     connectPG
     driverPostgreSQL { typeMap = [("integer", [t|Int|])] }
     "public"
