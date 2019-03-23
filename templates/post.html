@@ -4,8 +4,14 @@
   <div class="meta">
     <i class="fas fa-calendar fa-sm"></i>
     <span class="date">
-      $date$
+      $published$
     </span>
+    $if(updated)$
+      <i class="fas fa-redo fa-sm"></i>
+      <span class="date">
+        $updated$
+      </span>
+    $endif$
     <span class="tag">
       <i class="fas fa-folder fa-lg"></i>  $category$
       <i class="fas fa-tags"></i>    $tags$
