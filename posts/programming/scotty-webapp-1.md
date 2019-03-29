@@ -1,6 +1,7 @@
 ---
 title: (Scottyその1) HaskellのORMであるHRRを使う
 published: 2019-02-24
+updated: 2019-03-29
 tags: Haskell, Scotty
 toc: on
 ---
@@ -164,5 +165,16 @@ defineTableFromDB
 
 `driverPostgreSQL`でデフォルトを上書きしていますが, これが反映されません. 理由はまだ分かっていません...
 
+**追記**: これについては解決できました. `defineTableFromDB'`という関数を使って以下のようにすればできます.
 
-アプリケーション開発ができないほどの問題ではないのでこれで先に進もうと思います.
+```haskell
+defineTableFromDB'
+    connectPG
+    driverPostgreSQL { typeMap = [("integer", [t|Int|])] }
+    "public"
+    "app_user"
+    [("id", [t|Int|])] -- 追加
+    [''Show, ''Generic]
+```
+
+カラムごとに定義する面倒さはありますが, とりあえず動くのでよしとします.
