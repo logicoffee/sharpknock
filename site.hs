@@ -18,12 +18,12 @@ main = hakyll $ do
         route   idRoute
         compile copyFileCompiler
 
-    match "css/highlight.pack.js" $ do
+    match "css/highlight/highlight.pack.js" $ do
         route idRoute
         compile copyFileCompiler
 
-    match "css/solarized-light.css" $ do
-        route $ constRoute "css/highlight.css"
+    match "css/highlight/styles/*" $ do
+        route idRoute
         compile copyFileCompiler
 
     match "css/*.scss" $ do
