@@ -16,7 +16,7 @@ Reactコンポーネントをスタイリングする方法のひとつである
 
 ## コード
 
-コードを見ていただくのが早いでしょうから, 完成形をお見せします.
+コードを見ていただくのが早いでしょうから, 完成形をお見せします(`tsx`のシンタクスハイライトが微妙ですが...).
 
 ```tsx
 import * as React from 'react'
@@ -60,4 +60,4 @@ export default withStyles(styles)(Foo)
 ## Theme のデフォルト値
 上の例の`theme.spacing`のように, 予め用意されている値を使うことができます. どんなものが用意されているかは次のページにまとめられています.
 
-https://material-ui.com/customization/default-theme/
+[https://material-ui.com/customization/default-theme/](https://material-ui.com/customization/default-theme/)
