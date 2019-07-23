@@ -14,7 +14,7 @@ main = hakyll $ do
     categories <- buildCategories "posts/**" (fromCapture "categories/*/1.html")
     let postCtx = postContextWith categories tags
 
-    match "images/*" $ do
+    match "images/**" $ do
         route   idRoute
         compile copyFileCompiler
 
