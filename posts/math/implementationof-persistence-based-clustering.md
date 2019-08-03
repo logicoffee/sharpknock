@@ -8,8 +8,6 @@ tags: PersistentHomology, Clustering
 
 <!--more-->
 
-{toc}
-
 以下の記事で, パーシステントホモロジーを使ったクラスタリング方法のアイデアを解説しました.
 
 [パーシステントホモロジーでクラスタリング](/posts/math/clustering-using-persistent-homology.html)
