@@ -44,6 +44,15 @@ tags: PersistentHomology
 
 上の論文で紹介されている persistence landscape が時系列データの解析に有用であることを延べています. ここではアメリカ株式市場の4つの主要な指標を集めたデータに対して persistence landscape のノルムを計算し, ITバブルの崩壊とリーマンショックの手前でノルムの値が上昇することが示されています.
 
+### [Topological Machine Learning with Persistence Indicator Functions (2019)](https://arxiv.org/pdf/1907.13496.pdf)
+
+パーシステントホモロジーを要約する persistence indicator function というものを定義しています. 単にバーコードの本数を数えるだけの関数ですが, 仮説検定や k-SVM, k-PCA に応用できることが延べられています.
+
+
+### [TopoLines: Topological Smoothing for Line Charts (2019)](https://arxiv.org/pdf/1906.09457.pdf)
+
+パーシステントホモロジーを使って折れ線グラフを smoothing する方法が紹介されています. パーシステントホモロジーはデータのノイズを除去するのが得意なので, 適材適所という感じですね.
+
 
 ## ソフトウェア
 
