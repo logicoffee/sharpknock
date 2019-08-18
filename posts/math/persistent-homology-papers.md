@@ -54,6 +54,12 @@ tags: PersistentHomology
 パーシステントホモロジーを使って折れ線グラフを smoothing する方法が紹介されています. パーシステントホモロジーはデータのノイズを除去するのが得意なので, 適材適所という感じですね.
 
 
+### [Persistence weighted Gaussian kernel for topological data analysis (2016)](https://arxiv.org/pdf/1601.01741.pdf)
+
+パーシステント図に対してカーネル法を用いる方法が延べられています.
+
+kernel mean embedding を使ってパーシステント図全体の集合からヒルベルト空間への写像を作ります. ガウスカーネル等の性質のいいカーネルの場合これは単射となるため, 情報を損失させずにヒルベルト空間内で議論ができます. ノイズをどれくらい取り込むかを制御するパラメータがあることや, グラム行列を近似する方法があることが利点です.
+
 ## ソフトウェア
 
 ### [Homcloud](https://www.wpi-aimr.tohoku.ac.jp/hiraoka_labo/homcloud/)
