@@ -1,6 +1,7 @@
 ---
 title: パーシステントホモロジーに関する文献リスト
 published: 2019-08-10
+updated: 2019-08-24
 tags: PersistentHomology
 ---
 
@@ -32,7 +33,7 @@ tags: PersistentHomology
 
 ### [Proximity of Persistence Modules and their Diagrams (2009)](https://geometry.stanford.edu/papers/ccggo-ppmd-09/ccggo-ppmd-09.pdf)
 
-上の論文でも引用されている論文です. パーシステント図の安定性について延べています.
+上の論文でも引用されている論文です. パーシステント図の安定性について述べています.
 
 パーシステント図は一般に加群の列があれば定義できます. 点を太らせていくパーシステントホモロジーも, ホモロジー群の列を経由してパーシステント図を導いていますからね. この加群の列を persistence module と呼び, パーシステント図同士には bottleneck dictance という距離を導入します. persistence module が似通っていれば, bottleneck distance も小さいことを証明しています.
 
@@ -42,11 +43,11 @@ tags: PersistentHomology
 
 ### [Topological Data Analysis of Financial Time Series: Landscapes of Crashes (2017)](https://arxiv.org/pdf/1703.04385.pdf)
 
-上の論文で紹介されている persistence landscape が時系列データの解析に有用であることを延べています. ここではアメリカ株式市場の4つの主要な指標を集めたデータに対して persistence landscape のノルムを計算し, ITバブルの崩壊とリーマンショックの手前でノルムの値が上昇することが示されています.
+上の論文で紹介されている persistence landscape が時系列データの解析に有用であることを述べています. ここではアメリカ株式市場の4つの主要な指標を集めたデータに対して persistence landscape のノルムを計算し, ITバブルの崩壊とリーマンショックの手前でノルムの値が上昇することが示されています.
 
 ### [Topological Machine Learning with Persistence Indicator Functions (2019)](https://arxiv.org/pdf/1907.13496.pdf)
 
-パーシステントホモロジーを要約する persistence indicator function というものを定義しています. 単にバーコードの本数を数えるだけの関数ですが, 仮説検定や k-SVM, k-PCA に応用できることが延べられています.
+パーシステントホモロジーを要約する persistence indicator function というものを定義しています. 単にバーコードの本数を数えるだけの関数ですが, 仮説検定や k-SVM, k-PCA に応用できることが述べられています.
 
 
 ### [TopoLines: Topological Smoothing for Line Charts (2019)](https://arxiv.org/pdf/1906.09457.pdf)
@@ -56,9 +57,13 @@ tags: PersistentHomology
 
 ### [Persistence weighted Gaussian kernel for topological data analysis (2016)](https://arxiv.org/pdf/1601.01741.pdf)
 
-パーシステント図に対してカーネル法を用いる方法が延べられています.
+パーシステント図に対してカーネル法を用いる方法が述べられています.
 
 kernel mean embedding を使ってパーシステント図全体の集合からヒルベルト空間への写像を作ります. ガウスカーネル等の性質のいいカーネルの場合これは単射となるため, 情報を損失させずにヒルベルト空間内で議論ができます. ノイズをどれくらい取り込むかを制御するパラメータがあることや, グラム行列を近似する方法があることが利点です.
+
+### [Persistence Images: A Stable Vector Representation of Persistent Homology (2015)](https://arxiv.org/pdf/1507.06217.pdf)
+
+パーシステントホモロジーを要約する Persistent Images というものを定義しています. Persistent Image はベクトルなので, 各種の機械学習アルゴリズムに適用することができることが強みです. また Persistent Diagram や Persistent Landscape よりも計算コストがかからず, (論文で考察している k-medoids 法においては) これらよりも分類性能が高いことが述べられています.
 
 ## ソフトウェア
 
