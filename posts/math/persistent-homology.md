@@ -19,6 +19,9 @@ mathjax: on
 - [タンパク質構造とトポロジー](https://www.kyoritsu-pub.co.jp/bookdetail/9784320110021)(書籍)
 - [位相的データ解析の基礎と応用](https://www.wpi-aimr.tohoku.ac.jp/hiraoka_labo/introduction_j.pdf)(スライド)
 
+数学に素養のある方なら論文にも目を通すことが可能でしょう. 以下の記事で私が読んだ論文をまとめてあります. 興味のある方はご覧ください.
+
+[パーシステントホモロジーに関する文献リスト](/posts/math/persistent-homology-papers.html)
 
 ## ホモロジー
 

@@ -1,6 +1,7 @@
 ---
 title: パーシステントホモロジーに関する文献リスト
 published: 2019-08-10
+updated: 2019-08-24
 tags: PersistentHomology
 ---
 
@@ -56,9 +57,13 @@ tags: PersistentHomology
 
 ### [Persistence weighted Gaussian kernel for topological data analysis (2016)](https://arxiv.org/pdf/1601.01741.pdf)
 
-パーシステント図に対してカーネル法を用いる方法が延べられています.
+パーシステント図に対してカーネル法を用いる方法が述べられています.
 
 kernel mean embedding を使ってパーシステント図全体の集合からヒルベルト空間への写像を作ります. ガウスカーネル等の性質のいいカーネルの場合これは単射となるため, 情報を損失させずにヒルベルト空間内で議論ができます. ノイズをどれくらい取り込むかを制御するパラメータがあることや, グラム行列を近似する方法があることが利点です.
+
+### [Persistence Images: A Stable Vector Representation of Persistent Homology (2015)](https://arxiv.org/pdf/1507.06217.pdf)
+
+パーシステントホモロジーを要約する Persistent Images というものを定義しています. Persistent Image はベクトルなので, 各種の機械学習アルゴリズムに適用することができることが強みです. また Persistent Diagram や Persistent Landscape よりも計算コストがかからず, (論文で考察している k-medoids 法においては) これらよりも分類性能が高いことが述べられています.
 
 ## ソフトウェア
 
