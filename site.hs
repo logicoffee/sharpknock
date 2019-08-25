@@ -50,7 +50,7 @@ main = hakyll $ do
         compile $ do
             posts <- recentFirst =<< loadAll "posts/**"
             let indexCtx =
-                    listField "posts" postCtx (return $ take 5 posts) <>
+                    listField "posts" postCtx (return $ take 10 posts) <>
                     constField "title" "Home"                         <>
                     defaultContext
 
@@ -105,7 +105,7 @@ main = hakyll $ do
 
     --------- Archive ---------------------------------------------------------
     archivePaginate <- buildPaginateWith
-        (sortRecentFirst >=> return . paginateEvery 10)
+        (sortRecentFirst >=> return . paginateEvery 15)
         "posts/**"
         (fromCapture "archives/*.html" . show)
 
