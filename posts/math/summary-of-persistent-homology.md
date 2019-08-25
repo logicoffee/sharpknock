@@ -28,9 +28,9 @@ mathjax: on
 
 日本語の文献ではパーシステント図と表記されます.
 
-#### 定義
+#### 諸定義
 
-実数 $\mathbb{R}$ を添え字集合とするフィルトレーション $\{X_\alpha\}_{\alpha\in\mathbb{R}}$, つまり $\alpha < \alpha'$ に対して $X_\alpha \subset X_{\alpha'}$ が成り立つような位相空間の族を考えます. $k$ 次元の穴 $\sigma$ が $X_\alpha$ で発生し, $X_{\alpha'}$ で消滅するようなものであるとき, $(\alpha, \alpha')\in\mathbb{R}^2$ を $p_\sigma$ と表すことにします($p_\sigma$ という記法はこの記事特有のものであることに注意).
+**[パーシステント図]** 実数 $\mathbb{R}$ を添え字集合とするフィルトレーション $\{X_\alpha\}_{\alpha\in\mathbb{R}}$, つまり $\alpha < \alpha'$ に対して $X_\alpha \subset X_{\alpha'}$ が成り立つような位相空間の族を考えます. $k$ 次元の穴 $\sigma$ が $X_\alpha$ で発生し, $X_{\alpha'}$ で消滅するようなものであるとき, $(\alpha, \alpha')\in\mathbb{R}^2$ を $p_\sigma$ と表すことにします($p_\sigma$ という記法はこの記事特有のものであることに注意).
 
 フィルトレーション内に現れる全ての $k$ 次元の穴 $\sigma$ に対する, $p_\sigma$ の集合 $\{p_\sigma\}_\sigma$ を $k$ 次パーシステント図といいます. ただしこの集合は重複度(multiplicity)も考慮した, multiset と呼ばれるものです. 例えば $X_\alpha$ で発生し, $X_{\alpha'}$ で消滅するような $k$ 次元の穴が丁度2つ存在した場合, $(\alpha, \alpha')$ の重複度は $2$ です.
 
@@ -51,7 +51,15 @@ $$
 ただし $\gamma$ は multi-bijection 全体を走ります.
 
 
-#### 
+#### 長所
+
+可視性に優れています. 
+
+#### 短所
+
+代数的な操作ができません. 例えば2つのパーシステント図の和を考えることができません.
+
+p-Wasserstein distance の計算はとても大変です.
 
 ### Barcodes
 
