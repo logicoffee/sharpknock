@@ -28,11 +28,18 @@ mathjax: on
 
 日本語の文献ではパーシステント図と表記されます.
 
+#### 初出
+
 #### 諸定義
 
-**multiset**: 重複度(multiplicity)も考慮した集合のことです.
+**multiset**: 各点の重複度(multiplicity)も考慮した集合のことです. 例えば $\{a, a, a, b, b\}$ などです.
 
-**パーシステント図**: 実数 $\mathbb{R}$ を添え字集合とするフィルトレーション $\{X_\alpha\}_{\alpha\in\mathbb{R}}$, つまり $\alpha < \alpha'$ に対して $X_\alpha \subset X_{\alpha'}$ が成り立つような位相空間の族を考えます. $k$ 次元の穴 $\sigma$ が $X_\alpha$ で発生し, $X_{\alpha'}$ で消滅するようなものであるとき, $(\alpha, \alpha')\in\mathbb{R}^2$ を $p_\sigma$ と表すことにします($p_\sigma$ という記法はこの記事特有のものであることに注意).
+**multi-bijection**: multiset 間の全単射です. ただし重複度も考慮します. 例えば $\{a, a, a, b, b\}$ と $\{x, y, y\}$ の間には, 通常の集合としては全単射が存在しますが, multi-bijection は存在しません.
+
+**パーシステント図**: フィルトレーションから生じる multiset のことです. もう少し詳しく説明しましょう. 実数 $\mathbb{R}$ を添え字集合とするフィルトレーション $\{X_\alpha\}_{\alpha\in\mathbb{R}}$, つまり $\alpha < \alpha'$ に対して $X_\alpha \subset X_{\alpha'}$ が成り立つような位相空間の族を考えます. $k$ 次元の穴 $\sigma$ が $X_b$ で発生し $X_d$ で消滅するようなものであるとき, $b$ を $\sigma$ の発生時刻(birth time), $d$ を $\sigma$ の消滅時刻(death time)と呼びます. $k$ 次パーシステント図とは, フィルトレーション内に現れる $k$ 次元の穴全てに対して, 
+$$
+\left\{(b_\sigma, d_\sigma) \in \mathbb{R} \mid \right\}
+$$
 
 フィルトレーション内に現れる全ての $k$ 次元の穴 $\sigma$ に対する, $p_\sigma$ の集合 $\{p_\sigma\}_\sigma$ を $k$ 次パーシステント図といいます. ただしこの集合は重複度(multiplicity)も考慮した, multiset と呼ばれるものです. 例えば $X_\alpha$ で発生し, $X_{\alpha'}$ で消滅するような $k$ 次元の穴が丁度2つ存在した場合, $(\alpha, \alpha')$ の重複度は $2$ です.
 
@@ -40,11 +47,8 @@ mathjax: on
 
 定義から, パーシステント図の各点は対角線よりも上側に存在することがわかります. また, 消滅時刻と発生時刻の差 $\alpha'-\alpha$ を $\sigma$ の persistence と言います.
 
-#### 付随する概念
 
-multiset 間の写像 multi-bijection とは, 重複度も考慮した全単射のことです. 
-
-対角線上の点を重複度 $\infty$ として加えたパーシステント図同士の p-Wasserstein distance とは, 以下で定義される距離です.
+**p-Wasserstein distance**: 対角線上の点を重複度 $\infty$ として加えたパーシステント図同士の p-Wasserstein distance とは, 以下で定義される距離です.
 
 $$
 W_p(D, D') = \inf_{\gamma:D\to D'}\left(\sum_{u\in B}\|u-\gamma(u)\|^p_\infty\right)^{1/p}
