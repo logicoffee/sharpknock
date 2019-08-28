@@ -30,6 +30,10 @@ mathjax: on
 
 #### 初出
 
+この論文が初出だってのは見つかりませんでした.
+
+[2007年のこの論文](https://link.springer.com/content/pdf/10.1007/s00454-006-1276-5.pdf)に, [2002年のこの論文](https://link.springer.com/content/pdf/10.1007/s00454-002-2885-2.pdf)で導入されたと書かれているのは見つけましたが, パーシステント図自体は登場していません. 似たような概念は出てきていますが.
+
 #### 諸定義
 
 **multiset**: 各点の重複度(multiplicity)も考慮した集合のことです. 例えば $\{a, a, a, b, b\}$ などです.
@@ -47,15 +51,28 @@ $k$ 次パーシステント図とは, フィルトレーション内に現れ�
 **p-Wasserstein distance**: 対角線上の点を重複度 $\infty$ として加えたパーシステント図同士の p-Wasserstein distance とは, 以下で定義される距離です.
 
 $$
-W_p(D, D') = \inf_{\gamma:D\to D'}\left(\sum_{u\in B}\|u-\gamma(u)\|^p_\infty\right)^{1/p}
+W_p(D, D') = \inf_{\gamma:D\to D'}\left(\sum_{u\in D}\|u-\gamma(u)\|^p_\infty\right)^{1/p}
 $$
 
 ただし $\gamma$ は multi-bijection 全体を走ります.
 
+**bottleneck distance**: 対角線上の点を重複度 $\infty$ として加えたパーシステント図同士の bottleneck distance とは $W_\infty$ のことです.
+
+$$
+W_\infty(D, D') = \inf_{\gamma:D\to D'}\sup_{u\in D}\|u-\gamma(u)\|_\infty
+$$
 
 #### 長所
 
-可視性に優れています. 
+データのノイズに対する安定性があります. [この論文](https://geometry.stanford.edu/papers/ccggo-ppmd-09/ccggo-ppmd-09.pdf)では, 関数の sublevel sets に由来するするパーシステント図の安定性について論じています. ざっくり言うと
+
+$$
+\|f-g\|_\infty < \varepsilon \Longrightarrow W_\infty(D_f, D_g) < c\varepsilon
+$$
+
+ということです. ただし $c$ は条件によって変化します.
+
+他に利点を挙げるとすれば, 可視性に優れていることでしょうか.
 
 #### 短所
 
