@@ -76,6 +76,14 @@ $$
 
 ということです. ただし $c$ は条件によって変化します.
 
+[こちらの論文](https://arxiv.org/pdf/1207.3885.pdf)には, 有限距離空間の Rips complex や Cech comlex などに由来するパーシステント図の安定性について論じています. ざっくり言うと
+
+$$
+W_\infty(D_X, D_Y) \leq 2\mathrm{d_{GH}}(X, Y)
+$$
+
+ということです. ただし $\mathrm{d_{GH}}$ は Gromov-Housdorff distance です.
+
 他に利点を挙げるとすれば, 可視性に優れていることでしょうか. 元のデータがどんな高次元に住んでいようと, パーシステント図は2次元平面内に表現できます.
 
 #### 短所
@@ -87,7 +95,30 @@ Wasserstein distance によってパーシステント図全体には距離空�
 
 ### Barcodes
 
+#### 諸定義
+
+**Barcode**: パーシステント図は点の集合 $\{(b_\sigma, d_\sigma)\}_\sigma$ でしたが, Barcode は区間の集合 $\{[b_\sigma, d_\sigma]\}_\sigma$ です.
+
+
+#### 長所
+
+パーシステントホモロジーはフィルトレーションにおけるホモロジー類のライフサイクルを捉えるものです. フィルトレーションというのは位相空間の増大列ですから, $0$ 次ホモロジー類である連結成分は必ずひとつ以上残ります. つまりこのホモロジー類は消滅時刻を持ちません. したがって, このホモロジー類に対応するパーシステント図上の点も存在しないことになります. しかし Barcode ならば右半開区間 $[b_\sigma, \infty)$ を考えることにより, このホモロジー類も扱うことができます. 
+
+またパーシステント図と同様に可視化に優れています. 以前書いた[こちらの記事](/posts/math/clustering-using-persistent-homology.html)のように, 息の長いホモロジー類の個数が数えやすいため, クラスタリングもしやすいです.
+
+#### 短所
+
+パーシステント図と同様に2つの Barcodes の平均を求めるようなことはできません.
+
+
 ### Persistence Landscapes
+
+#### 初出
+
+[Statistical Topological Data Analysis using Persistence Landscapes](http://www.jmlr.org/papers/volume16/bubenik15a/bubenik15a.pdf)
+
+#### 諸定義
+
 
 ### Persistence Indicator Functions
 
