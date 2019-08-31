@@ -204,7 +204,40 @@ $$
 
 これは短所なのかはっきり断定できませんが, 2つの landscape の平均に対応するような persistence diagram は存在するとは限りません. 
 
+#### 応用例
+
+以下の論文では persistence landscapes を使って金融時系列データの分析をしています.
+
+[Topological Data Analysis of Financial Time Series:
+Landscapes of Crashes](https://arxiv.org/pdf/1703.04385.pdf)
+
+アメリカ株式市場の4つの主要な指標を集めたデータに対して persistence landscape のノルムを計算し, ITバブルの崩壊とリーマンショックの手前でノルムの値が上昇することが示されています.
+
 ### Persistence Indicator Functions
+
+#### 初出
+
+Clique Community Persistence: A Topological Visual Analysis Approach for Complex Networks という論文が初出のようですが, この次の論文である [Topological Machine Learning with Persistence
+Indicator Functions](https://arxiv.org/pdf/1907.13496.pdf) に詳細が書かれているようです. 以下は後者の論文を参考にして書いています.
+
+#### 諸定義
+
+**indicator function**: パーシステント図 $D$ に対し indicator function $I_D: \mathbb{R}\to\mathbb{N}$ は以下で定義されます.
+
+$$
+I_D(\varepsilon) = |\{(b, d)\in D \mid \varepsilon\in[b,d]\}|
+$$
+
+つまりは barcode の本数を数えているのと同じですね. ただし長さが無限大であるような barcode は除きます.
+
+対応するパーシステント図と barcode と indicator function を並べてみます.
+
+![](/images/indicator_function.jpg)
+
+
+#### 長所
+
+#### 短所
 
 ### Persistence Images
 
