@@ -68,7 +68,7 @@ $$
 
 #### 長所
 
-データのノイズに対する安定性があります. [この論文](https://geometry.stanford.edu/papers/ccggo-ppmd-09/ccggo-ppmd-09.pdf)では, 関数の sublevel sets に由来するするパーシステント図の安定性について論じています. ざっくり言うと
+データのノイズに対する安定性があります. [この論文](https://geometry.stanford.edu/papers/ccggo-ppmd-09/ccggo-ppmd-09.pdf)では, 関数の sublevel sets に由来するパーシステント図の安定性について論じています. ざっくり言うと
 
 $$
 \|f-g\|_\infty < \varepsilon \Longrightarrow W_\infty(D_f, D_g) < c\varepsilon
@@ -123,14 +123,14 @@ Wasserstein distance によってパーシステント図全体には距離空�
 
 #### 諸定義
 
-**persistent module**: 実数 $\mathbb{R}$ を添え字集合とするベクトル空間の族 $\{M_a\}_{a\in\mathbb{R}}$ が persistent module とは, $a\leq b$ に対し以下の条件をみたすような線形写像 $M(a\leq b): M_a \to M_b$ がひとつ定まっているようなもののことを言います.
+**persistence module**: 実数 $\mathbb{R}$ を添え字集合とするベクトル空間の族 $\{M_a\}_{a\in\mathbb{R}}$ が persistence module とは, $a\leq b$ に対し以下の条件をみたすような線形写像 $M(a\leq b): M_a \to M_b$ がひとつ定まっているようなもののことを言います.
 
 - $M(a\leq a) = id_{M_a}$
 - $M(b\leq c) \circ M(a\leq b) = M(a\leq c)$
 
-例えばフィルトレーション $\{X_a\}_{a\in\mathbb{R}}$ にホモロジー関手をかませば persistent module $\{H_*(X_a)\}_{a\in\mathbb{R}}$ が得られます.
+例えばフィルトレーション $\{X_a\}_{a\in\mathbb{R}}$ にホモロジー関手をかませば persistence module $\{H_*(X_a)\}_{a\in\mathbb{R}}$ が得られます.
 
-**persistence landscape**: persistence module $\{M_a\}$ に対し $\beta^{a, b} = \dim(\mathrm{Im}(M(a\leq b)))$ と定義し, rank function $\lambda: \mathbb{R}^2 \to \mathbb{R}$ を以下で定義します.
+**persistence landscape**: $\{M_a\}$ を persistence module とします. $a\leq b$ に対し $\beta^{a, b} = \dim(\mathrm{Im}(M(a\leq b)))$ と定義し, rank function $r: \mathbb{R}^2 \to \mathbb{R}$ を以下で定義します.
 
 $$
 r(b, d) =
@@ -170,9 +170,39 @@ $$
 \lambda(k, t) = \sup\{h \geq 0 \mid \beta^{t-h, t+h} \geq k\}
 $$
 
-ただし $\overline{\mathbb{R}} = \mathbb{R}\cup \{-\infty, \infty\}$ です. また, $\lambda_k = \lambda(k, -): \mathbb{R}\to\overline{\mathbb{R}}$ のように関数の族と考えることもできます. 今考えているパーシステント図の例においては以下のような関数の族が得られます.
+ただし $\overline{\mathbb{R}} = \mathbb{R}\cup \{-\infty, \infty\}$ です. またこれは論文に明記はされていませんが, $\sup \varnothing = 0$ としているようです(じゃあなんで $\overline{\mathbb{R}}$ を考えているんだって感じですが, このあたりの理由はよく分かりません).
+
+persistence landscape は $\lambda_k = \lambda(k, -): \mathbb{R}\to\overline{\mathbb{R}}$ のように関数の族と考えることもできます. 今考えているパーシステント図の例においては以下のような landscape が得られます.
 
 ![](/images/persistence_landscape.jpg)
+
+
+
+#### 長所
+
+landscapes 全体はベクトル空間の構造を持ちます. さらに $1\leq p \leq \infty$ に対しノルム $\|\lambda\|_p$ を
+
+$$
+\begin{aligned}
+&\|\lambda\|^p_p = \sum_{k=1}^\infty \|\lambda_k\|^p_p\\
+&\|\lambda\|_\infty = \|\lambda_1\|_\infty
+\end{aligned}
+$$
+
+と定義することで, landscapes 全体は Banach 空間の構造を持ちます. パーシステント図全体は距離空間の構造しか持っていなかったわけですから, 代数/解析的にかなり扱いやすくなりました.
+
+landscape も安定性を持ちます. 位相空間 $X$ 上の関数 $f: X\to\mathbb{R}$ の sublevel sets に由来する landscape を $\lambda^f$ と表すことにします(ここだけの記号です). このとき $f, g: X\to\mathbb{R}$ に対し次の不等式が成り立ちます.
+
+$$
+\|\lambda^f - \lambda^g\|_\infty \leq \|f-g\|_\infty
+$$
+
+つまり landscape が $\infty$ ノルムに関して安定的であるということです. 論文には $p$ ノルムに関する安定性についても延べられていますが, 付随する条件が複雑なので割愛します.
+
+
+#### 短所
+
+これは短所なのかはっきり断定できませんが, 2つの landscape の平均に対応するような persistence diagram は存在するとは限りません. 
 
 ### Persistence Indicator Functions
 
