@@ -64,7 +64,7 @@ $\pi$ と $\pi_*$ は定数倍違うだけなので, 上の式の $\pi$ の代�
 具体的な分布を用いて実験してみましょう. まず知りたい分布はガンマ分布とします. 今回は正規化係数がきれいな形をしているので, $\pi(x)$ をそのまま使えますね.
 
 $$
-\pi(x) = \mathrm{Gam}(x \mid 2, 2) = x\exp^{-2x}
+\pi(x) = \mathrm{Gam}(x \mid 2, 2) = xe^{-2x}
 $$
 
 提案分布は, 直前のサンプルを中心とする正規分布にしましょう.
@@ -82,7 +82,41 @@ $$
 julia で書けば以下のようになるでしょう.
 
 ```julia
+using Random
 
+burn_in = 100
+iter = 1000
+
+# ガンマ分布
+gam(x) = x * exp(-2.0 * x)
+
+# 受理確率 (rand() と比較するため, min{-, 1} というふうに考えなくてよい)
+α(x_t, x_*) = gam(x_*) / gam(x_t)
+
+# 初期値
+x = 1.0
+samples = Vector{Float64}()
+
+for _ = 1:burn_in
+    x = next_sample(x)
+end
+
+for _ = 1:iter
+    x = next_sample(x)
+    push!(samples, x)
+end
+
+function next_sample(x)
+    # x を中心とする分散が1であるような正規分布から x_* を取得
+    x_* = randn() + x
+    acceptance_rate = α(x, x_*)
+
+    if acceptance_rate < rand(x)
+        return x
+    else
+        return x_*
+    end
+end
 ```
 
 ### どんなケースで使うのか？
