@@ -119,6 +119,24 @@ function next_sample(x)
 end
 ```
 
+### 種類
+
+提案分布の選び方によっては特別に名前がつけられています.
+
+#### Metropolis Algorithm
+$q(y \mid x) = q(x \mid y)$ が成り立つ場合, Metropolis Algorithm と呼びます.
+
+上のガンマ分布の例がこれに当てはまります. 受理確率が簡単な形をしています.
+
+#### Random Walk Metropolis Hastings
+$q(y \mid x) = f(y - x)$ と表せる場合, Random Walk Metropolis Hastings と呼びます.
+
+ガンマ分布の例はこれにも当てはまります.
+
+#### Independent Metropolis Hastings
+$q(y \mid x) = f(y)$ と表せる場合, Independent Metropolis Hastings と呼びます.
+
+
 ### どんなケースで使うのか？
 
 ベイズ推論の文脈で言えば, 事後分布が解析的に計算できない場合に, サンプリング手法に力を借りるという選択肢が浮上します.
@@ -178,6 +196,51 @@ $$
 
 それゆえ変数をグループ化し, グループごとにサンプリングするという方法も考えられるのでした.
 
-しかしそれだけではなかなか計算量を減らすことができません. ここでは数学的な方面から計算量を減らす方法を解説します.
+しかしそれだけではなかなか計算量を減らすことができません. ここでは以下の論文で紹介されている高速化の手法を紹介します.
+
+- [Accelerating Metropolis–Hastings algorithms: Delayed acceptance with prefetching](https://arxiv.org/pdf/1406.2660.pdf)
 
 記号が複雑になるので, 変数をまるごとサンプリングする場合を考えます(もしくは1変数の場合を考えていると思っていただいても構いません).
+
+さて, もともとのアルゴリズムにおける受理確率は
+
+$$
+\alpha(x_t, x_*) = \min\left\{\frac{\pi(x_*)q(x_t \mid x_*)}{\pi(x_t)q(x_* \mid x_t)}, 1\right\}
+$$
+
+でした. これを以下のように積に分解できたとしましょう.
+
+$$
+\alpha(x_t, x_*) = \prod_{i = 1}^d \ro_i(x_t, x_*)
+$$
+
+たとえば $0.72 = 0.8 \dot 0.9$ のような分解です. この分解は以下の言い換えを意味します.
+
+:::{.center}
+$0.72$ の確率で1つのハードルを超える $=$ $0.8$ の確率で1つめのハードルを超え, $0.9$ の確率で2つめのハードルを超える
+:::
+
+裏を返せば, １つめのハードルが超えられない時点で2つめは飛ぶ必要がないということです. これにより早期リジェクトが実現します.
+
+計算量が少なく受理確率が低いものをはじめのハードルとして据えられたら, リジェクトの効率が高くなり, 結果としてサンプリングの高速化が望めます.
+
+ここで注意しておきたいのが, 決してアクセプトの計算量を減らすことにはならないということです.
+
+
+### 適応的MH法
+
+棄却サンプリングに適応的棄却サンプリングが存在するように, 適応的MH法というものも存在します. これは早期リジェクトでは補いきれないアクセプトの効率を高めるのに役立ちます.
+
+早期リジェクトでリジェクトの効率を高められるのはいいことなのですが, そもそも棄却率を下げられればそれに越したことはありません.
+
+本質的な意味で棄却率を下げるには, 提案分布を目的分布に似せる他ありません.
+
+ギブスサンプリングというのは提案分布が目的分布そのものでしたから, 棄却率が0です.
+
+しかし目的分布が未知だから, より汎用的なMH法を使っているのでしたよね.
+
+以下の論文で紹介されている Adaptive Proposal Algorithm を使えば, より適切な提案分布を利用することができます.
+
+[Adaptive proposal distribution for random walk Metropolis algorithm](https://www.researchgate.net/profile/Heikki_Haario/publication/2762543_Adaptive_Proposal_Distribution_for_Random_Walk_Metropolis_Algorithm/links/02e7e528e1325cb270000000/Adaptive-Proposal-Distribution-for-Random-Walk-Metropolis-Algorithm.pdf)
+
+この論文では提案分布が直前の
