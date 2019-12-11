@@ -75,40 +75,49 @@ julia で書けば以下のようになるでしょう.
 ```julia
 using Random
 
-burn_in = 100
-iter = 1000
-
 # ガンマ分布
 gam(x) = x * exp(-2.0 * x)
 
 # 受理確率 (rand() と比較するため, min{-, 1} というふうに考えなくてよい)
-α(x_t, x_*) = gam(x_*) / gam(x_t)
+α(x_t, x_c) = gam(x_c) / gam(x_t)
 
-# 初期値
-x = 1.0
-samples = Vector{Float64}()
+function mh(burn_in, iter)
+    # 初期値
+    x = 1.0
+    samples = Vector{Float64}()
 
-for _ = 1:burn_in
-    x = next_sample(x)
-end
+    for _ = 1:burn_in
+        x = next_sample(x)
+    end
 
-for _ = 1:iter
-    x = next_sample(x)
-    push!(samples, x)
+    for _ = 1:iter
+        x = next_sample(x)
+        push!(samples, x)
+    end
+
+    return samples
 end
 
 function next_sample(x)
-    # x を中心とする分散が1であるような正規分布から x_* を取得
-    x_* = randn() + x
-    acceptance_rate = α(x, x_*)
+    # x を中心とする分散が1であるような正規分布から x_c を取得
+    x_c = randn() + x
+    acceptance_rate = α(x, x_c)
 
-    if acceptance_rate < rand(x)
+    if acceptance_rate < rand()
         return x
     else
-        return x_*
+        return x_c
     end
 end
 ```
+
+これを `histogram(mh(10000, 1000), bins = 50)` のように実験してみると, 以下のようなヒストグラムが得られました. 
+
+![](images/mh_gamma.png)
+
+$\mathrm{Gam}(2, 2)$ の密度関数は次のような形をしていますから, おおかたの形は捉えられていることが分かります.
+
+![](images/gamma_2_2.png)
 
 ## 種類
 
