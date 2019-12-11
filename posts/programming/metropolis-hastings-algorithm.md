@@ -1,6 +1,6 @@
 ---
 title: メトロポリス・ヘイスティングス法の解説
-published: 20191211
+published: 2019-12-11
 tags: 機械学習, ベイズ推論, サンプリングアルゴリズム
 toc: on
 mathjax: on
