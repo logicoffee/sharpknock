@@ -113,11 +113,11 @@ end
 
 これを `histogram(mh(10000, 1000), bins = 50)` のように実験してみると, 以下のようなヒストグラムが得られました.
 
-![](images/mh_gamma.png)
+![](/images/mh_gamma.png)
 
 $\mathrm{Gam}(2, 2)$ の密度関数は次のような形をしていますから, おおかたの形は捉えられていることが分かります.
 
-![](images/gamma_2_2.png)
+![](/images/gamma_2_2.png)
 
 ## 種類
 
