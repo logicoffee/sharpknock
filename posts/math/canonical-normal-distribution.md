@@ -1,6 +1,6 @@
 ---
 title: ベイズ推論で正規分布使うなら標準形のほうがいいかもよ？
-published: 2019-12-25
+published: 2019-12-26
 tags: 確率分布, ベイズ推論, 機械学習
 toc: on
 mathjax: on
@@ -27,7 +27,7 @@ $$
 Z(\theta) = \int_{\mathbb{R}^m}h(x)e^{\theta^\top \phi(x)} dx
 $$
 
-$\theta$ は標準パラメータ (canonical parameter) と言い, この密度関数の形を標準形と言います.
+$\theta$ を標準パラメータ (canonical parameter) と言い, この密度関数の形を標準形と言います.
 
 正規分布や二項分布, ポアソン分布など, よく出てくる分布は指数型分布族です.
 
@@ -46,7 +46,7 @@ $$
 \mathcal{N}_c(x | \xi, \lambda)
 $$
 
-$\xi, \lambda$ は2つあわせて標準パラメータ (canonical parameter) と言います. 個別のパラメータ名については, Julia の Distributions パッケージに倣い, それぞれ potential, precision と呼ぶことにしましょう.
+$\xi, \lambda$ 2つあわせたものが標準パラメータです.
 
 これらのパラメータの変換則を1次元と多次元に分けて紹介していきます.
 
@@ -71,7 +71,7 @@ $$
 \end{aligned}
 $$
 
-とくにベイズ推論では密度関数の全体を計算する必要がないことが多いです. したがって上記の形だけ覚えておけば十分です.
+とくにベイズ推論では密度関数の全体を計算する必要がないことが多いので, 上記の形だけ覚えておけば十分です.
 
 ### 多次元
 
@@ -101,7 +101,7 @@ $$
 
 #### 計算公式
 
-ベイズ推論では複数の密度関数の積を計算することがよくありますが, 2つの正規分布の積は次のように簡単に計算できます. ただし $\simeq$ は本記事において定数倍を除いて等しいことを表すことにします.
+ベイズ推論では複数の密度関数の積を計算することがよくありますが, 2つの正規分布の積は次のように簡単に計算できます. ただし本記事において $\simeq$ は定数倍を除いて等しいことを表すことにします.
 
 $$
 \mathcal{N}_c(x | \xi_0, \Lambda_0)\mathcal{N}_c(x | \xi_1, \Lambda_1) \simeq \mathcal{N}_c(x | \xi_0 + \xi_1, \Lambda_0 + \Lambda_1)
@@ -109,16 +109,16 @@ $$
 
 ## ベイズ推論における例
 
-ユーザー $u$ のアイテム $i$ に対する評価値が $X_{u, i}$ であるような行列 $X$ を生成するモデルを考えます. 各評価値 $X_{u, i}$ は user factor vector $W_u$ と item factor vector $H_i$ の内積を平均とする正規分布から生成されていると仮定します. 各 $W_u, H_i$ の事前分布にも正規分布を設定します. まとめると, 以下のようなモデルを考えているということです.
+ユーザー $u$ のアイテム $i$ に対する評価値が $X_{u, i}$ であるような行列 $X$ を生成するモデルを考えます. 各評価値 $X_{u, i}$ は user factor vector $W_u$ と item factor vector $H_i$ の内積 $W_u^\top H_i$ を平均とする正規分布から生成されていると仮定します. 各 $W_u, H_i$ の事前分布にも正規分布を設定します. まとめると, 以下のようなモデルを考えているということです.
 
 $$
 \begin{aligned}
 & X \in \mathbb{R}^{U \times I} \\
 & W_u \in \mathbb{R}^D \quad (u = 1, \ldots, U) \\
 & H_i \in \mathbb{R}^D \quad (i = 1, \ldots, I) \\[1em]
-& p(X_{u, i} | W_u, H_i) = \mathcal{N}(X_{u, i} | W_u^\top H_i, \lambda^{-1}) \\
-& p(W_u) = \mathcal{N}(W_u | \mu_u^W, (\Lambda_u^W)^{-1}) \\
-& p(H_i) = \mathcal{N}(H_i | \mu_i^H, (\Lambda_i^H)^{-1}) \\
+& p(X_{u, i} | W_u, H_i) = \mathcal{N}\left(X_{u, i} | W_u^\top H_i, \lambda^{-1}\right) \\
+& p(W_u) = \mathcal{N}\left(W_u \Big| \mu_u^W, \left(\Lambda_u^W\right)^{-1}\right) \\
+& p(H_i) = \mathcal{N}\left(H_i \Big| \mu_i^H, \left(\Lambda_i^H\right)^{-1}\right) \\
 \end{aligned}
 $$
 
@@ -129,7 +129,7 @@ $$
 まずは $W_u$ をサンプルすることを考えます. 答えを先に言ってしまうと, $W_u$ の条件付き分布は正規分布になります. しかも (記事の流れから当然ですが) 標準形で表したほうがシンプルになります.
 
 
-$p(X_{u, i} | W_u, H_i)$ の指数部分を取り出すと, 以下のように変形できます. ただし $\sim$ は本記事において $W_u$ に関係ない定数部分を除いて等しいことを表します.
+$p(X_{u, i} | W_u, H_i)$ の指数部分を取り出すと, 以下のように変形できます. ただし本記事において $\sim$ は $W_u$ に関係ない定数部分を除いて等しいことを表します.
 
 $$
 \begin{aligned}
@@ -145,9 +145,15 @@ $$
 $$
 \begin{aligned}
 &\prod_i\mathcal{N}_c\left(W_u | \lambda X_{u, i}H_i,\ \lambda H_i H_i^\top\right) \mathcal{N}\left(W_u | \mu_u^W,\ (\Lambda_u^W)^{-1}\right) \\
-&\simeq \mathcal{N}_c\left(W_u \Bigg| \lambda\sum_i X_{u, i}H_i,\ \lambda\sum H_i H_i^\top\right) \mathcal{N}_c\left(W_u | \Lambda_u^W\mu_u^W,\ \Lambda_u^W\right) \\
-&\simeq \mathcal{N}_c\left(W_u \Bigg| \Lambda_u^W\mu_u^W + \lambda\sum_i X_{u, i}H_i,\quad \Lambda_u^W + \lambda\sum H_i H_i^\top\right)
+&\simeq \mathcal{N}_c\left(W_u \Bigg| \lambda\sum_i X_{u, i}H_i,\ \lambda\sum_i H_i H_i^\top\right) \mathcal{N}_c\left(W_u | \Lambda_u^W\mu_u^W,\ \Lambda_u^W\right) \\
+&\simeq \mathcal{N}_c\left(W_u \Bigg| \Lambda_u^W\mu_u^W + \lambda\sum_i X_{u, i}H_i,\quad \Lambda_u^W + \lambda\sum_i H_i H_i^\top\right)
 \end{aligned}
+$$
+
+$H_i$ の条件付き分布も同様です.
+
+$$
+\mathcal{N}_c\left(H_i \Bigg| \Lambda_i^H\mu_i^H + \lambda\sum_u X_{u, i}W_u,\quad \Lambda_i^H + \lambda\sum_u W_u W_u^\top \right)
 $$
 
 パラメータの足し算だけで計算できるので楽ちんですね！
