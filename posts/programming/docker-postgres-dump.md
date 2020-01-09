@@ -36,7 +36,7 @@ pg_dump --create --clean --if-exists --schema-only -U [user_name] [database_name
 $ docker exec [container] pg_dump --create --clean --if-exists --schema-only -U [user_name] [database_name] > [file_name]
 ```
 
-括弧`[]`で囲んだ部分は人によって異なる部分です. 
+括弧`[]`で囲んだ部分は人によって異なる部分です.
 
 ## Compose
 
@@ -46,7 +46,7 @@ $ docker exec [container] pg_dump --create --clean --if-exists --schema-only -U 
 $ docker-compose exec [service] pg_dump --create --clean --if-exists --schema-only -U [user_name] [database_name] > [file_name]
 ```
 
-括弧`[]`で囲んだ部分は人によって異なる部分です. 
+括弧`[]`で囲んだ部分は人によって異なる部分です.
 
 ## ポートフォワーディング
 ポートフォワーディングしていて, 且つローカルマシンに`pg_dump`コマンドがインストールされている場合は以下のようにもできるかもしれません.
