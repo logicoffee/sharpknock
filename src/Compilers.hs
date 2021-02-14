@@ -12,7 +12,7 @@ pandocCompilerWithToc = do
     identifier <- getUnderlying
     enabled <- getMetadataField identifier "toc"
     case enabled of
-        Nothing -> pandocCompilerWith defaultHakyllReaderOptions wOptions
+        Nothing -> pandocCompilerWithTransform defaultHakyllReaderOptions wOptions modifyClass
         Just _  -> pandocCompilerWithTransform defaultHakyllReaderOptions wOptions (insertToc . modifyClass)
 
 wOptions :: WriterOptions

@@ -33,7 +33,7 @@ tags: Haskell, モナド, 圏論
 
 Haskellにおける型クラス`Monad`とは次のようなものです.
 
-```hs
+```haskell
 class Monad m where
     (>>=) :: forall a b. m a -> (a -> m b) -> m b 
     return :: a -> m a
@@ -41,7 +41,7 @@ class Monad m where
 
 ただし2つの関数`(>>=)`と`return`は以下の等式を満たす必要があります. これらがいわゆるモナド則です.
 
-```hs
+```haskell
 return a >>= f  == f a
 m >>= return    == m
 (m >>= f) >>= g == m >>= (\x -> (f x >>= g))
@@ -49,7 +49,7 @@ m >>= return    == m
 
 実はこのモナド則は次のように書き換えることもできます.
 
-```hs
+```haskell
 join . fmap (fmap f) == fmap f . join
 join . fmap join     == join . join
 join . return        == join . fmap return == id
@@ -57,14 +57,14 @@ join . return        == join . fmap return == id
 
 ただし
 
-```hs
+```haskell
 fmap :: (a -> b) -> m a -> m b
 join :: m (m a) -> m a
 ```
 
 であり,
 
-```hs
+```haskell
 fmap f m == m >>= (return . f)
 join n   == n >>= id
 m >>= g  == join (fmap g m)
@@ -343,7 +343,7 @@ join_a \circ return_{M(a)} &= join_a\circ M(return_a) = \mathrm{id}_{M(a)}
 \end{aligned}
 $$
 
-```hs
+```haskell
 join . fmap (fmap f) == fmap f . join
 join . fmap join     == join . join
 join . return        == join . fmap return == id

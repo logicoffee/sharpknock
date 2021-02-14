@@ -53,7 +53,7 @@ CircleCIにログインしたあとのページの左のカラムから, 「ADD 
 
 Hakyllブログのプロジェクトルートに`.circleci`というディレクトリを作成し,　その中に設定ファイルを作成します. 私の設定ファイルをほとんどそのまま利用できるので, プロジェクトルートで以下を実行してもらうのが早いと思います.
 
-```
+```none
 $ curl -o .circleci/config.yml --create-dirs https://raw.githubusercontent.com/logicoffee/sharpknock/master/.circleci/config.yml
 ```
 

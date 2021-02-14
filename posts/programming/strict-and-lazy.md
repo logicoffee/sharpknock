@@ -11,13 +11,13 @@ tags: Haskell
 
 次のコードは問題なく動き, 実行結果は`3`です. タプルの第二要素は評価されなかったということですね.
 
-```hs
+```haskell
 main = print $ fst $ (3, undefined)
 ```
 
 同様に以下も動きます.
 
-```hs
+```haskell
 data Human = Human
     { name :: String
     , age  :: Int
@@ -31,7 +31,7 @@ main = do
 
 パターンマッチもOKです.
 
-```hs
+```haskell
 data Human = Human
     { name :: String
     , age  :: Int
@@ -45,7 +45,7 @@ main = do
 
 ネストしていてもOKです. `FullName`は各フィールドが正格評価ですが, `Human`自体は`name`が`undefined`でも問題ありません.
 
-```hs
+```haskell
 data Human = Human
     { name :: FullName
     , age  :: Int

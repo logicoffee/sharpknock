@@ -67,7 +67,7 @@ func SomeFunc() {
 ```
 `main`が`SomeFunc`を呼んで, `SomeFunc`が`panic`を呼んでいます. これを実行すると以下の出力が得られます(ユーザー名は隠してあります).
 
-```
+```none
 inside main
 inside SomeFun
 deferred function inside SomeFunc

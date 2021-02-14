@@ -13,8 +13,10 @@ Dockerコンテナ内で起動しているPostgreSQLのデータベースをダ�
 
 ## 基本構文
 
-```
-pg_dump --create --clean --if-exists --schema-only -U [user_name] [database_name] > [file_name]
+```none
+pg_dump --create --clean --if-exists --schema-only \
+  -U [user_name] [database_name] \
+  > [file_name]
 ```
 
 ### オプションについて
@@ -32,8 +34,10 @@ pg_dump --create --clean --if-exists --schema-only -U [user_name] [database_name
 単体のコンテナを動かしている場合は以下のようになります.
 
 
-```
-$ docker exec [container] pg_dump --create --clean --if-exists --schema-only -U [user_name] [database_name] > [file_name]
+```none
+docker exec [container] pg_dump --create --clean --if-exists --schema-only \
+  -U [user_name] [database_name] \
+  > [file_name]
 ```
 
 括弧`[]`で囲んだ部分は人によって異なる部分です.
@@ -42,8 +46,10 @@ $ docker exec [container] pg_dump --create --clean --if-exists --schema-only -U 
 
 `docker-compose`を使って複数のコンテナを同時に動かしている場合は以下のようになります.
 
-```
-$ docker-compose exec [service] pg_dump --create --clean --if-exists --schema-only -U [user_name] [database_name] > [file_name]
+```none
+docker-compose exec [service] pg_dump --create --clean --if-exists --schema-only \
+  -U [user_name] [database_name] \
+  > [file_name]
 ```
 
 括弧`[]`で囲んだ部分は人によって異なる部分です.
@@ -51,13 +57,15 @@ $ docker-compose exec [service] pg_dump --create --clean --if-exists --schema-on
 ## ポートフォワーディング
 ポートフォワーディングしていて, 且つローカルマシンに`pg_dump`コマンドがインストールされている場合は以下のようにもできるかもしれません.
 
-```
-$ pg_dump --create --clean --if-exists --schema-only -h localhost -p [port] -U [user_name] [database_name] > [file_name]
+```none
+pg_dump --create --clean --if-exists --schema-only -h localhost -p [port] \
+  -U [user_name] [database_name] \
+  > [file_name]
 ```
 
 ただし, ローカルマシンとコンテナの`pd_dump`のバージョンが一致していなくてはなりません. 一致していない場合は以下のようなエラーが出力され, ダンプができません.
 
-```
+```none
 pg_dump: server version: 11.1; pg_dump version: 10.6
 pg_dump: aborting because of server version mismatch
 ```
