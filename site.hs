@@ -1,10 +1,9 @@
---------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
+import           Compilers
 import           Control.Monad
 import           Hakyll
 import           Hakyll.Web.Sass (sassCompiler)
 import           Lib.Context     (descriptionField)
-import           Toc.Compiler
 
 
 --------------------------------------------------------------------------------
@@ -18,11 +17,7 @@ main = hakyll $ do
         route   idRoute
         compile copyFileCompiler
 
-    match "css/highlight/highlight.pack.js" $ do
-        route idRoute
-        compile copyFileCompiler
-
-    match "css/highlight/styles/*" $ do
+    match "css/highlight/*" $ do
         route idRoute
         compile copyFileCompiler
 

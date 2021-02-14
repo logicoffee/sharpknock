@@ -6,6 +6,8 @@
 
 ブログデザインには [Kiko-plus](https://github.com/leehosung/Kiko-plus) を使っています ([ライセンスはこちら](https://github.com/leehosung/Kiko-plus/blob/master/LICENSE.md)).
 
+シンタックスハイライトには [PRISM](https://prismjs.com/index.html) に改変を加えたものを使っています ([ライセンスはこちら](https://github.com/PrismJS/prism/blob/master/LICENSE)).
+
 ## プライバシーポリシー
 
 当ブログでは Google アナリティクスを利用しています. それに伴うプライバシーポリシーは [こちら](/privacy-policy.html) に記載しております.

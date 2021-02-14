@@ -1,15 +1,17 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Toc.Trans where
+module Trans.Toc where
 
-import           Data.Function                   (on)
-import           Data.List                       (groupBy)
-import           Data.Tree                       (Forest, Tree (Node))
-import           Text.Blaze                      ((!))
-import           Text.Blaze.Html.Renderer.String
-import qualified Text.Blaze.Html5                as H
-import qualified Text.Blaze.Html5.Attributes     as A
-import           Text.Blaze.Internal             (MarkupM (Empty))
+import           Data.Function                 (on)
+import           Data.List                     (groupBy)
+import qualified Data.Text                     as T
+import qualified Data.Text.Lazy                as TL
+import           Data.Tree                     (Forest, Tree (Node))
+import           Text.Blaze                    ((!))
+import           Text.Blaze.Html.Renderer.Text
+import qualified Text.Blaze.Html5              as H
+import qualified Text.Blaze.Html5.Attributes   as A
+import           Text.Blaze.Internal           (MarkupM (Empty))
 import           Text.Pandoc
 import           Text.Pandoc.Walk
 
@@ -31,7 +33,7 @@ markupHeader (Node (Header _ (ident, _, _) inlines) headers)
     | null headers  = H.li link
     | otherwise     = H.li $ link <> H.ul (markupHeaders headers)
         where
-            link = H.a ! A.href (H.toValue ("#" ++ ident)) $
+            link = H.a ! A.href (H.toValue (T.append "#" ident)) $
                 renderPandocToHtml (Pandoc nullMeta [Plain inlines])
 markupHeader _ = Empty ()
 
@@ -48,14 +50,13 @@ markupToc :: Forest Block -> H.Html
 markupToc headers =
     H.div ! A.id "toc" $ H.ul $ markupHeaders headers
 
-replaceToc :: String -> Block -> Block
-replaceToc toc (Para [Str "{toc}"]) = RawBlock "html" toc
+replaceToc :: TL.Text -> Block -> Block
+replaceToc toc (Para [Str "{toc}"]) = RawBlock "html" (TL.toStrict toc)
 replaceToc _ block                  = block
 
 insertToc :: Pandoc -> Pandoc
 insertToc source =
-    walk (replaceToc toc_str) source where
+    walk (replaceToc tocStr) source where
         headers  = query (filterHeader 3) source
-        toc_html = markupToc . makeHeaderForest $ headers
-        toc_str  = renderHtml toc_html
-
+        tocHtml = markupToc . makeHeaderForest $ headers
+        tocStr  = renderHtml tocHtml

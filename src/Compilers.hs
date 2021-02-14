@@ -1,8 +1,11 @@
-module Toc.Compiler where
+{-# LANGUAGE OverloadedStrings #-}
+
+module Compilers where
 
 import           Hakyll
 import           Text.Pandoc.Options
-import           Toc.Trans
+import           Trans.Highlight     (modifyClass)
+import           Trans.Toc           (insertToc)
 
 pandocCompilerWithToc :: Compiler (Item String)
 pandocCompilerWithToc = do
@@ -10,7 +13,7 @@ pandocCompilerWithToc = do
     enabled <- getMetadataField identifier "toc"
     case enabled of
         Nothing -> pandocCompilerWith defaultHakyllReaderOptions wOptions
-        Just _  -> pandocCompilerWithTransform defaultHakyllReaderOptions wOptions insertToc
+        Just _  -> pandocCompilerWithTransform defaultHakyllReaderOptions wOptions (insertToc . modifyClass)
 
 wOptions :: WriterOptions
 wOptions = defaultHakyllWriterOptions

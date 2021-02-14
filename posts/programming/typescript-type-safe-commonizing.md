@@ -137,8 +137,11 @@ const genericAction = <A extends Action<string, any>>(
 
 解答例2のコードなんですが, 気分としては `dispatch` の型は `Dispatch<A>` と書きたくなります. しかしそうしてしまうと以下のような型エラーが発生します.
 
-```
-typescript:Error:2345:Argument of type '{ type: A["type"]; value: A["value"]; }' is not assignable to parameter of type 'A'. '{ type: A["type"]; value: A["value"]; }' is assignable to the constraint of type 'A', but 'A' could be instantiated with a different subtype of constraint 'Action<string, any>'.
+```language-none
+typescript:Error:2345:
+Argument of type '{ type: A["type"]; value: A["value"]; }' is not assignable to parameter of type 'A'.
+'{ type: A["type"]; value: A["value"]; }' is assignable to the constraint of type 'A',
+but 'A' could be instantiated with a different subtype of constraint 'Action<string, any>'.
 ```
 
 これは `extends` による型制約が原因です.
