@@ -16,7 +16,7 @@ jobs:
             - stack-
       - run:
           name: Resolve Dependencies
-          command: stack build --dependencies-only
+          command: stack build --dependencies-only -j1
       - save_cache:
           name: Cache Dependencies
           key: stack-{{ .Branch }}-{{ checksum "stack.yaml" }}
@@ -25,7 +25,7 @@ jobs:
             - ./.stack-work
       - run:
           name: Build Site App
-          command: stack build --pedantic
+          command: stack build --pedantic -j1
       - run:
           name: Generate Static Site
           command: stack exec sharpknock rebuild
