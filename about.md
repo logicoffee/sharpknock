@@ -4,7 +4,9 @@
 
 当ブログは Haskell 製の静的サイトジェネレーターである [Hakyll](https://jaspervdj.be/hakyll/) によって生成されています ([ライセンスはこちら](https://github.com/jaspervdj/hakyll/blob/master/LICENSE)).
 
-ブログデザインには [Kiko-plus](https://github.com/leehosung/Kiko-plus) を使っています ([ライセンスはこちら](https://github.com/leehosung/Kiko-plus/blob/master/LICENSE.md)).
+ブログデザインには [Kiko-plus](https://github.com/leehosung/Kiko-plus) に改変を加えたものを使っています ([ライセンスはこちら](https://github.com/leehosung/Kiko-plus/blob/master/LICENSE.md)).
+
+シンタックスハイライトには [PRISM](https://prismjs.com/index.html) に改変を加えたものを使っています ([ライセンスはこちら](https://github.com/PrismJS/prism/blob/master/LICENSE)).
 
 ## プライバシーポリシー
 

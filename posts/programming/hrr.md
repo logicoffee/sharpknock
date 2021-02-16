@@ -46,7 +46,7 @@ SQLジェネレーターのHRR(Haskell Relational Record)を使ってみまし�
 
 `stack new`で新規プロジェクトを作成します.
 
-```
+```none
 stack --resolver lts-12.13 new hrr_experiments --bare
 ```
 
@@ -202,25 +202,25 @@ $(defineTableFromDB
 
 まずはDBを起動しましょう.
 
-```
+```none
 $ docker-compose up -d
 ```
 
 次にGHCiを起動します.
 
-```
+```none
 $ stack ghci
 ```
 
 問題がなければ起動ができるはずです. するとこんな感じのプロンプトが表示されるかと思います.
 
-```
+```none
 *Main DB Entity.Country>
 ```
 
 ここで, 以下のコマンドを実行します.
 
-```
+```none
 *Main DB Entity.Country> :browse Entity.Country
 ```
 

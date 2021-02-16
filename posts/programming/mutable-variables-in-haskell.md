@@ -19,7 +19,7 @@ Haskellでは全ての変数がイミュータブルです. つまり再代入�
 
 代表的な関数は以下の通りです.
 
-```hs
+```haskell
 newIORef :: a -> IO (IORef a)
 readIORef :: IORef a -> IO a
 writeIORef :: IORef a -> a -> IO ()
@@ -33,7 +33,7 @@ modifyIORef :: IORef a -> (a -> a) -> IO ()
 
 注意しなければならないのは, 全ての関数の戻り値はIOアクションであるという点です.
 
-```hs
+```haskell
 import           Control.Monad (forM_)
 import           Data.IORef
 
@@ -57,7 +57,7 @@ main = do
 
 代表的な関数は以下の通りです.
 
-```hs
+```haskell
 newSTRef :: a -> ST s (STRef s a)
 readSTRef :: STRef s a -> ST s a
 writeSTRef :: STRef s a -> a -> ST s ()
@@ -68,7 +68,7 @@ modifySTRef :: STRef s a -> (a -> a) -> ST s ()
 
 ### 使い方
 
-```hs
+```haskell
 import           Control.Monad    (forM_)
 import           Control.Monad.ST (runST)
 import           Data.STRef
@@ -96,7 +96,7 @@ main = print $ runST $ do
 
 代表的な関数は以下の通り.
 
-```hs
+```haskell
 get :: State s s
 put :: s -> State s ()
 modify :: (s -> s) -> State s ()
@@ -110,7 +110,7 @@ execState :: State s a -> s -> s
 
 型引数`s`の部分に整数のタプルを保持することで, フィボナッチ数を求めてみました.
 
-```hs
+```haskell
 import           Control.Monad                  (forM_)
 import           Control.Monad.Trans.State.Lazy
 
@@ -125,7 +125,7 @@ main = print $ execState fibo (1, 1)
 
 もう少し`State`っぽい例を挙げてみましょう. 
 
-```hs
+```haskell
 import           Control.Monad.Trans.State.Lazy
 
 data Coord = Coord Int Int
@@ -157,7 +157,7 @@ main = print $ (`evalState` Coord 0 0) $ do
 ### 定義
 型`StateVar a`は`StateVar`パッケージの`Data.StateVar`モジュールで定義されています. ただその前に, このモジュールで定義されている型クラスについて触れておきましょう.
 
-```hs
+```haskell
 class HasGetter t a | t -> a where
     get :: monadIO m => t -> m a
 
@@ -183,7 +183,7 @@ instance HasUpdate (IORef a) a
 
 では`StateVar`の定義です.
 
-```hs
+```haskell
 data StateVar a = StateVar (IO a) (a -> IO())
 
 instance HasGetter (StateVar a) a
@@ -196,7 +196,7 @@ getterの役割を持つ`IO a`とsetterの役割を持つ`a -> IO()`から, `Sta
 ### 使い方
 まずは`StateVar`ではなく, 3つの型クラスのインスタンスになっている`IORef`の例から.
 
-```hs
+```haskell
 import           Control.Monad (forM_)
 import           Data.IORef
 import           Data.StateVar
@@ -215,7 +215,7 @@ main = do
 
 次に`StateVar`の例です(結局`IORef`の力を借りていますけどね...).
 
-```hs
+```haskell
 import           Control.Monad (forM_)
 import           Data.IORef
 import           Data.StateVar
@@ -233,7 +233,7 @@ main = do
 ```
 これの実行結果は次の通りです.
 
-```
+```none
 1
 3
 4
