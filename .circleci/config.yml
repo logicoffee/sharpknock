@@ -5,7 +5,7 @@ jobs:
       only:
         - master
     docker:
-      - image: logicoffee/hakyll_netlify:lts-12.16
+      - image: logicoffee/hakyll_netlify:lts-16.31
     steps:
       - checkout
       - restore_cache:
