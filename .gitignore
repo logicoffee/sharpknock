@@ -22,3 +22,6 @@ _site/
 /.netlify
 sharpknock.cabal
 .DS_Store
+
+# Local Netlify folder
+.netlify
